@@ -1,637 +1,476 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dira Creative Studios — Guía de Reels · Anita</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Anita — My Scripts · Dira Creative Studios</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --blue:       #0A2FA8;
-    --blue-mid:   #1A4FD8;
-    --blue-light: #5B8EF0;
-    --blue-pale:  #E8EFFF;
-    --red:        #D41F1F;
-    --red-mid:    #E83535;
-    --red-light:  #F07070;
-    --dark:       #080C1A;
-    --dark2:      #0F1528;
-    --white:      #FFFFFF;
-    --paper:      #F4F6FB;
-    --paper2:     #E9EDF8;
-    --ink:        #0D1230;
-    --muted:      #6B75A0;
+    --blue:      #1A4FD8;
+    --blue-l:    #5B8EF0;
+    --blue-pale: #E8EFFF;
+    --red:       #D41F1F;
+    --red-l:     #F07070;
+    --red-pale:  #FFEAEA;
+    --purple:    #7B5FD4;
+    --pur-pale:  #F0EBFF;
+    --green:     #1A6B3A;
+    --dark:      #080C1A;
+    --dark2:     #0F1528;
+    --white:     #FFFFFF;
+    --paper:     #F4F6FB;
+    --muted:     #6B75A0;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Outfit', sans-serif;
-    font-weight: 400;
-    line-height: 1.6;
+    background: var(--dark);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
 
-  /* ── HEADER ── */
-  header {
-    background: var(--dark);
-    min-height: 360px;
+  /* ── BACKGROUND GRAIN ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 32px 50px;
     text-align: center;
-    position: relative;
+    padding: 60px 32px;
     overflow: hidden;
   }
 
-  header::before {
+  .hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(10,47,168,0.25) 0%, transparent 50%, rgba(212,31,31,0.18) 100%);
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 50%, rgba(26,79,216,0.2) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 80% 50%, rgba(212,31,31,0.15) 0%, transparent 60%);
     pointer-events: none;
   }
 
-  header::after {
-    content: 'DIRA';
+  .hero-bg-text {
     position: absolute;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 280px;
+    font-size: clamp(120px, 20vw, 280px);
     font-weight: 700;
-    color: rgba(255,255,255,0.022);
+    color: rgba(255,255,255,0.025);
     letter-spacing: -8px;
-    pointer-events: none;
     user-select: none;
     white-space: nowrap;
-    bottom: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
   }
 
-  .brand-logo {
+  .dira-tag {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 28px;
     position: relative;
+    animation: fadeUp 0.8s ease both;
   }
 
-  .brand-logo .dot-b { width: 10px; height: 10px; border-radius: 50%; background: var(--blue-light); }
-  .brand-logo .dot-r { width: 10px; height: 10px; border-radius: 50%; background: var(--red-mid); }
-
-  .brand-logo span {
-    color: rgba(255,255,255,0.55);
+  .dira-tag .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dira-tag .dot.b { background: var(--blue-l); }
+  .dira-tag .dot.r { background: var(--red-l); }
+  .dira-tag span {
+    color: rgba(255,255,255,0.45);
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 3.5px;
-    text-transform: uppercase;
-  }
-
-  .vol-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid rgba(91,142,240,0.4);
-    color: var(--blue-light);
-    font-size: 10px;
     font-weight: 600;
     letter-spacing: 3px;
     text-transform: uppercase;
-    padding: 7px 18px;
-    border-radius: 2px;
-    margin-bottom: 24px;
-    position: relative;
   }
 
-  header h1 {
+  .hero h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(38px, 7vw, 76px);
+    font-size: clamp(52px, 9vw, 110px);
     font-weight: 700;
-    color: var(--white);
-    line-height: 1.05;
-    margin-bottom: 14px;
-    letter-spacing: -1px;
+    line-height: 1;
+    letter-spacing: -2px;
     position: relative;
+    animation: fadeUp 0.8s 0.1s ease both;
   }
 
-  header h1 em {
+  .hero h1 em {
     font-style: italic;
-    background: linear-gradient(90deg, var(--blue-light), var(--red-light));
+    background: linear-gradient(90deg, var(--blue-l), var(--red-l));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  header .subtitle {
-    color: rgba(255,255,255,0.38);
-    font-size: 14px;
+  .hero-sub {
+    margin-top: 20px;
+    color: rgba(255,255,255,0.35);
+    font-size: 15px;
     font-weight: 300;
     letter-spacing: 0.5px;
-    max-width: 500px;
     position: relative;
+    animation: fadeUp 0.8s 0.2s ease both;
   }
 
-  /* ── NAV PILLS ── */
-  .nav-pills {
-    background: var(--dark2);
+  /* ── FILTER TABS ── */
+  .filter-bar {
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    overflow-x: auto;
+    gap: 8px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+    position: relative;
+    animation: fadeUp 0.8s 0.3s ease both;
   }
 
-  .nav-pill {
-    font-size: 10px;
-    font-weight: 700;
+  .filter-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.45);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    padding: 15px 26px;
-    border-bottom: 2px solid transparent;
-    white-space: nowrap;
-    color: rgba(255,255,255,0.3);
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
   }
 
-  .nav-pill.v1 { border-color: var(--blue-light); color: var(--blue-light); }
-  .nav-pill.v2 { border-color: var(--red-mid);    color: var(--red-mid); }
-  .nav-pill.v3 { border-color: #A07FE8;            color: #A07FE8; }
+  .filter-btn:hover { border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); }
+  .filter-btn.active-all  { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: #fff; }
+  .filter-btn.active-en   { background: rgba(26,79,216,0.25); border-color: var(--blue-l); color: var(--blue-l); }
+  .filter-btn.active-es   { background: rgba(212,31,31,0.2); border-color: var(--red-l); color: var(--red-l); }
 
-  /* ── CONTAINER ── */
-  .container { max-width: 920px; margin: 0 auto; padding: 0 24px 100px; }
-
-  /* ── VIDEO BLOCK ── */
-  .video-block { margin-top: 72px; }
-
-  /* ── VIDEO HEADER ── */
-  .video-header {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 24px;
+  .scroll-hint {
+    margin-top: 60px;
+    color: rgba(255,255,255,0.2);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 32px 40px;
-    border-radius: 8px 8px 0 0;
+    gap: 8px;
+    animation: fadeUp 0.8s 0.5s ease both;
+  }
+
+  .scroll-arrow { font-size: 18px; animation: bounce 2s infinite; }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* ── SCRIPTS SECTION ── */
+  .scripts-section {
+    position: relative;
+    z-index: 1;
+    padding: 0 24px 100px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ── SCRIPT CARD ── */
+  .script-card {
+    margin-bottom: 48px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .script-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .script-card.hidden { display: none; }
+
+  /* Card header */
+  .card-header {
+    padding: 28px 36px;
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 20px;
+    align-items: center;
     position: relative;
     overflow: hidden;
   }
 
-  .vh-english  { background: linear-gradient(135deg, #071840, #0A2272); }
-  .vh-spanish1 { background: linear-gradient(135deg, #2A0808, #4A1010); }
-  .vh-spanish2 { background: linear-gradient(135deg, #150A2D, #251242); }
-
-  .video-header::after {
+  .card-header::after {
     content: '';
     position: absolute;
-    right: -40px; top: -40px;
-    width: 220px; height: 220px;
+    right: -30px; top: -30px;
+    width: 180px; height: 180px;
     border-radius: 50%;
-    opacity: 0.08;
+    opacity: 0.07;
   }
-  .vh-english::after  { background: var(--blue-mid); }
-  .vh-spanish1::after { background: var(--red-mid); }
-  .vh-spanish2::after { background: #A07FE8; }
 
-  .num {
+  .ch-v1 { background: linear-gradient(135deg, #071840, #0E2A7A); }
+  .ch-v1::after { background: var(--blue); }
+
+  .ch-v2 { background: linear-gradient(135deg, #2A0808, #5A1010); }
+  .ch-v2::after { background: var(--red); }
+
+  .ch-v3 { background: linear-gradient(135deg, #150A2D, #2A1255); }
+  .ch-v3::after { background: var(--purple); }
+
+  .card-num {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 76px;
+    font-size: 64px;
     font-weight: 700;
     line-height: 1;
   }
-  .vh-english  .num { color: var(--blue-light); }
-  .vh-spanish1 .num { color: var(--red-light); }
-  .vh-spanish2 .num { color: #C3A8FF; }
 
-  .vh-meta h2 {
+  .ch-v1 .card-num { color: var(--blue-l); }
+  .ch-v2 .card-num { color: var(--red-l); }
+  .ch-v3 .card-num { color: #C3A8FF; }
+
+  .card-meta h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 700;
     color: #fff;
-    line-height: 1.25;
+    line-height: 1.3;
     margin-bottom: 8px;
   }
 
-  .vh-meta .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
 
-  .tag {
+  .card-tag {
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    padding: 4px 10px;
+    padding: 3px 9px;
     border-radius: 2px;
-    border: 1px solid rgba(255,255,255,0.14);
-    color: rgba(255,255,255,0.45);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.4);
   }
 
-  .lang-tag {
+  .lang-pill {
     font-size: 11px;
     font-weight: 700;
-    padding: 8px 16px;
+    padding: 6px 14px;
     border-radius: 4px;
-    letter-spacing: 1px;
     white-space: nowrap;
     align-self: flex-start;
   }
 
-  .vh-english  .lang-tag { background: rgba(10,47,168,0.35);  color: var(--blue-light); border: 1px solid rgba(91,142,240,0.5); }
-  .vh-spanish1 .lang-tag { background: rgba(212,31,31,0.3);   color: var(--red-light);  border: 1px solid rgba(240,112,112,0.5); }
-  .vh-spanish2 .lang-tag { background: rgba(160,127,232,0.2); color: #C3A8FF;            border: 1px solid rgba(195,168,255,0.4); }
+  .ch-v1 .lang-pill { background: rgba(26,79,216,0.3); color: var(--blue-l); border: 1px solid rgba(91,142,240,0.4); }
+  .ch-v2 .lang-pill { background: rgba(212,31,31,0.25); color: var(--red-l); border: 1px solid rgba(240,112,112,0.4); }
+  .ch-v3 .lang-pill { background: rgba(123,95,212,0.25); color: #C3A8FF; border: 1px solid rgba(195,168,255,0.4); }
 
-  /* ── SONG BAR ── */
+  /* Song bar */
   .song-bar {
-    padding: 16px 40px;
+    padding: 13px 36px;
     display: flex;
     align-items: center;
-    gap: 14px;
-    border-left: 4px solid;
-    flex-wrap: wrap;
+    gap: 12px;
+    border-left: 3px solid;
   }
 
-  .sb-english  { background: #06102A; border-color: var(--blue-mid); }
-  .sb-spanish1 { background: #1A0606; border-color: var(--red); }
-  .sb-spanish2 { background: #0E0820; border-color: #7B5FD4; }
+  .sb-v1 { background: #06102A; border-color: var(--blue); }
+  .sb-v2 { background: #1A0606; border-color: var(--red); }
+  .sb-v3 { background: #0E0820; border-color: var(--purple); }
 
   .song-disc {
-    width: 34px; height: 34px;
+    width: 28px; height: 28px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
     flex-shrink: 0;
     animation: spin 5s linear infinite;
   }
 
-  .sb-english  .song-disc { background: rgba(91,142,240,0.18); }
-  .sb-spanish1 .song-disc { background: rgba(232,53,53,0.18); }
-  .sb-spanish2 .song-disc { background: rgba(160,127,232,0.18); }
+  .sb-v1 .song-disc { background: rgba(91,142,240,0.15); }
+  .sb-v2 .song-disc { background: rgba(212,31,31,0.15); }
+  .sb-v3 .song-disc { background: rgba(123,95,212,0.15); }
 
   @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-  .song-label {
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    flex-shrink: 0;
+  .song-lbl {
+    font-size: 9px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase; flex-shrink: 0;
   }
 
-  .sb-english  .song-label { color: var(--blue-light); }
-  .sb-spanish1 .song-label { color: var(--red-light); }
-  .sb-spanish2 .song-label { color: #A07FE8; }
+  .sb-v1 .song-lbl { color: var(--blue-l); }
+  .sb-v2 .song-lbl { color: var(--red-l); }
+  .sb-v3 .song-lbl { color: #A07FE8; }
 
-  .song-name {
-    color: rgba(255,255,255,0.82);
-    font-size: 13.5px;
-    font-weight: 500;
-    flex: 1;
-  }
+  .song-name { color: rgba(255,255,255,0.8); font-size: 13px; flex: 1; }
+  .song-name em { color: rgba(255,255,255,0.3); font-style: normal; font-size: 12px; }
 
-  .song-name em {
-    color: rgba(255,255,255,0.32);
-    font-style: normal;
-    font-size: 12px;
-  }
-
-  .song-why {
-    font-size: 11.5px;
-    font-style: italic;
-    color: rgba(255,255,255,0.28);
-    white-space: nowrap;
-  }
-
-  /* ── FULL SCRIPT ── */
-  .full-script {
-    background: var(--white);
+  /* Script body */
+  .script-body {
+    background: #fff;
+    padding: 32px 36px;
     border-left: 4px solid;
-    padding: 28px 40px;
   }
 
-  .fs-english  { border-color: var(--blue-mid); }
-  .fs-spanish1 { border-color: var(--red); }
-  .fs-spanish2 { border-color: #7B5FD4; }
+  .sb-border-v1 { border-color: var(--blue); }
+  .sb-border-v2 { border-color: var(--red); }
+  .sb-border-v3 { border-color: var(--purple); }
 
   .script-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 14px;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 16px;
   }
 
-  .fs-english  .script-label { color: var(--blue-mid); }
-  .fs-spanish1 .script-label { color: var(--red); }
-  .fs-spanish2 .script-label { color: #7B5FD4; }
+  .sb-border-v1 .script-label { color: var(--blue); }
+  .sb-border-v2 .script-label { color: var(--red); }
+  .sb-border-v3 .script-label { color: var(--purple); }
 
   .script-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
+    font-size: 19px;
     line-height: 1.85;
-    color: var(--ink);
+    color: var(--dark);
     white-space: pre-line;
   }
 
-  /* ── SCENES ── */
-  .scenes-wrapper {
-    background: var(--paper2);
-    border-radius: 0 0 8px 8px;
-    overflow: hidden;
-  }
-
-  .scenes-title {
-    padding: 26px 40px 0;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .scene {
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 28px;
-    padding: 26px 40px;
-    border-bottom: 1px solid rgba(10,47,168,0.08);
-    align-items: start;
-    transition: background 0.15s;
-  }
-
-  .scene:last-child { border-bottom: none; padding-bottom: 40px; }
-  .scene:hover { background: rgba(10,47,168,0.02); }
-
-  .scene-left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    padding-top: 4px;
-  }
-
-  .scene-num {
-    width: 36px; height: 36px;
-    border-radius: 50%;
+  /* Copy button */
+  .copy-btn {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
-    color: #fff;
-  }
-
-  .sn-english  { background: var(--blue-mid); }
-  .sn-spanish1 { background: var(--red); }
-  .sn-spanish2 { background: #7B5FD4; }
-
-  .scene-time {
-    font-size: 11px;
-    color: var(--muted);
-    font-weight: 500;
-    text-align: center;
-  }
-
-  .scene-right h3 {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
-
-  .scene-script {
-    background: var(--white);
-    padding: 14px 18px;
-    border-radius: 4px;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 16px;
-    line-height: 1.65;
-    color: var(--ink);
-    margin-bottom: 14px;
-    border-left: 2px solid rgba(10,47,168,0.12);
-  }
-
-  /* ── BLOCKS: Anita vs Dira ── */
-  .role-blocks { display: flex; flex-direction: column; gap: 10px; }
-
-  .role-block {
-    border-radius: 5px;
-    padding: 12px 16px;
-  }
-
-  .role-block.anita {
-    background: rgba(10,47,168,0.07);
-    border-left: 3px solid var(--blue-mid);
-  }
-
-  .role-block.dira {
-    background: rgba(212,31,31,0.06);
-    border-left: 3px solid var(--red);
-  }
-
-  /* purple variant for video 3 */
-  .block-purple.anita { border-left-color: #7B5FD4; background: rgba(123,95,212,0.07); }
-  .block-purple.dira  { border-left-color: #B04040; background: rgba(176,64,64,0.06); }
-
-  .role-tag {
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .anita .role-tag { color: var(--blue-mid); }
-  .dira  .role-tag { color: var(--red); }
-  .block-purple.anita .role-tag { color: #7B5FD4; }
-  .block-purple.dira  .role-tag { color: #B04040; }
-
-  .role-tag::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: currentColor;
-    opacity: 0.2;
-  }
-
-  .role-items { display: flex; flex-direction: column; gap: 5px; }
-
-  .role-item {
-    display: flex;
-    align-items: flex-start;
     gap: 8px;
-    font-size: 13px;
-    color: #2A3260;
-    line-height: 1.45;
-  }
-
-  .role-item .ri-dot {
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    margin-top: 8px;
-    flex-shrink: 0;
-  }
-
-  .anita .ri-dot { background: var(--blue-mid); }
-  .dira  .ri-dot { background: var(--red); }
-  .block-purple.anita .ri-dot { background: #7B5FD4; }
-  .block-purple.dira  .ri-dot { background: #B04040; }
-
-  /* ── POSTING SECTION ── */
-  .posting-section {
-    margin-top: 64px;
     background: var(--dark);
-    border-radius: 8px;
-    padding: 48px 40px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .posting-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(130deg, rgba(10,47,168,0.18) 0%, transparent 50%, rgba(212,31,31,0.12) 100%);
-    pointer-events: none;
-  }
-
-  .posting-section h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 6px;
-    position: relative;
-  }
-
-  .posting-section > p {
-    color: rgba(255,255,255,0.32);
-    font-size: 13.5px;
-    margin-bottom: 32px;
-    position: relative;
-  }
-
-  .posting-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    position: relative;
-  }
-
-  .posting-step {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 20px;
-    align-items: center;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 5px;
-    padding: 18px 24px;
-  }
-
-  .ps-day {
-    font-size: 10px;
-    font-weight: 700;
+    border: none;
+    color: rgba(255,255,255,0.45);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--blue-light);
+    padding: 14px 36px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s;
+    border-top: 1px solid rgba(255,255,255,0.05);
   }
 
-  .ps-content strong { display: block; color: #fff; font-size: 14px; margin-bottom: 3px; }
-  .ps-content span { color: rgba(255,255,255,0.33); font-size: 12.5px; }
-
-  .ps-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 8px; vertical-align: middle; }
-
-  /* ── DIVIDER ── */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(10,47,168,0.15), rgba(212,31,31,0.12), transparent);
-    margin-top: 64px;
-  }
+  .copy-btn:hover { background: #0D1230; color: rgba(255,255,255,0.7); }
+  .copy-btn.copied { color: #6ABF8E; }
+  .copy-icon { font-size: 14px; }
 
   /* ── FOOTER ── */
-  .brand-footer {
+  footer {
     text-align: center;
-    padding: 48px 24px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    padding: 40px 24px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+    z-index: 1;
   }
 
-  .bf-logo { display: flex; align-items: center; gap: 10px; }
-  .bf-bar { width: 40px; height: 3px; border-radius: 2px; }
-  .bf-bar.blue { background: var(--blue-mid); }
-  .bf-bar.red  { background: var(--red); }
-  .brand-footer .bf-name { font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
-  .brand-footer .bf-sub { font-size: 11px; color: #AAB0CC; letter-spacing: 1px; }
+  .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .f-bar { width: 36px; height: 2px; border-radius: 2px; }
+  .f-bar.b { background: var(--blue); }
+  .f-bar.r { background: var(--red); }
+
+  footer p { color: rgba(255,255,255,0.2); font-size: 12px; letter-spacing: 1px; }
+  footer .brand-name { color: rgba(255,255,255,0.4); font-weight: 600; letter-spacing: 3px; text-transform: uppercase; font-size: 12px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .script-card:nth-child(1) { animation-delay: 0.1s; }
+  .script-card:nth-child(2) { animation-delay: 0.2s; }
+  .script-card:nth-child(3) { animation-delay: 0.3s; }
 
   /* ── RESPONSIVE ── */
-  @media (max-width: 620px) {
-    .scene { grid-template-columns: 1fr; gap: 12px; }
-    .scene-left { flex-direction: row; align-items: center; }
-    .video-header { grid-template-columns: 1fr; gap: 12px; padding: 24px 20px; }
-    .num { font-size: 52px; }
-    .song-bar, .full-script, .scenes-title, .scene { padding-left: 20px; padding-right: 20px; }
-    .posting-section { padding: 32px 20px; }
-    .posting-step { grid-template-columns: 1fr; gap: 6px; }
-    .song-why { display: none; }
+  @media (max-width: 600px) {
+    .card-header { grid-template-columns: 60px 1fr; gap: 12px; padding: 20px; }
+    .lang-pill { display: none; }
+    .card-num { font-size: 44px; }
+    .song-bar, .script-body, .copy-btn { padding-left: 20px; padding-right: 20px; }
+    .hero h1 { letter-spacing: -1px; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="brand-logo">
-    <div class="dot-b"></div>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg-text">ANITA</div>
+
+  <div class="dira-tag">
+    <div class="dot b"></div>
     <span>Dira Creative Studios</span>
-    <div class="dot-r"></div>
+    <div class="dot r"></div>
   </div>
-  <div class="vol-badge">Guía de Producción · Vol. 2</div>
-  <h1>Reels para <em>Anita</em></h1>
-  <p class="subtitle">3 videos listos para grabar — tu única tarea es aparecer y decir el script. Del resto nos encargamos nosotros.</p>
-</header>
 
-<div class="nav-pills">
-  <div class="nav-pill v1">01 · English — Myth vs Reality</div>
-  <div class="nav-pill v2">02 · Español — Storytelling</div>
-  <div class="nav-pill v3">03 · Español — Timeline</div>
-</div>
+  <h1>My <em>Scripts</em></h1>
 
-<div class="container">
+  <p class="hero-sub">3 videos ready to record — your words, your story, your brand</p>
 
-  <!-- ══════════════════════════════════ -->
-  <!-- VIDEO 1 — ENGLISH                 -->
-  <!-- ══════════════════════════════════ -->
-  <div class="video-block">
+  <div class="filter-bar">
+    <button class="filter-btn active-all" onclick="filter('all', this)">All Videos</button>
+    <button class="filter-btn" onclick="filter('en', this)">🇺🇸 English</button>
+    <button class="filter-btn" onclick="filter('es', this)">🇪🇸 Español</button>
+  </div>
 
-    <div class="video-header vh-english">
-      <div class="num">01</div>
-      <div class="vh-meta">
-        <h2>"The Inspection Doesn't Protect You<br>The Way You Think"</h2>
-        <div class="tags">
-          <span class="tag">Myth vs Reality</span>
-          <span class="tag">Alto potencial de shares</span>
-          <span class="tag">25–30 seg</span>
+  <div class="scroll-hint">
+    <span>Scroll to your scripts</span>
+    <span class="scroll-arrow">↓</span>
+  </div>
+</section>
+
+<!-- ── SCRIPTS ── -->
+<div class="scripts-section">
+
+  <!-- VIDEO 01 — ENGLISH -->
+  <div class="script-card" data-lang="en">
+    <div class="card-header ch-v1">
+      <div class="card-num">01</div>
+      <div class="card-meta">
+        <h2>"The Inspection Doesn't Protect You the Way You Think"</h2>
+        <div class="card-tags">
+          <span class="card-tag">Myth vs Reality</span>
+          <span class="card-tag">25–30 sec</span>
         </div>
       </div>
-      <div class="lang-tag">🇺🇸 English</div>
+      <div class="lang-pill">🇺🇸 English</div>
     </div>
 
-    <div class="song-bar sb-english">
+    <div class="song-bar sb-v1">
       <div class="song-disc">🎵</div>
-      <span class="song-label">Música</span>
+      <span class="song-lbl">Music</span>
       <span class="song-name">"Midnight Rain" – Taylor Swift <em>(instrumental)</em></span>
-      <span class="song-why">Suave y seria — deja que las palabras tengan peso</span>
     </div>
 
-    <div class="full-script fs-english">
-      <div class="script-label">📄 Tu Script — Lo que vas a decir</div>
-      <div class="script-text">Everyone thinks the inspection protects them. And it does — just not the way most people think.
+    <div class="script-body sb-border-v1">
+      <div class="script-label">📄 Your Script</div>
+      <div class="script-text" id="script1">Everyone thinks the inspection protects them. And it does — just not the way most people think.
 
 An inspection tells you what's wrong with the house. It doesn't tell you if the seller has to fix it.
 
@@ -650,150 +489,34 @@ The inspection is just information.
 What you do with it — that's where your agent either saves you money or costs you it.</div>
     </div>
 
-    <div class="scenes-wrapper">
-      <div class="scenes-title">🎬 Escenas</div>
-
-      <div class="scene">
-        <div class="scene-left">
-          <div class="scene-num sn-english">1</div>
-          <div class="scene-time">0 – 5 seg</div>
-        </div>
-        <div class="scene-right">
-          <h3>🎣 Hook — Rompe la Creencia</h3>
-          <div class="scene-script">"Everyone thinks the inspection protects them. And it does — just not the way most people think."</div>
-          <div class="role-blocks">
-            <div class="role-block anita">
-              <div class="role-tag">Anita</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Cara seria, tono de "tengo algo importante que contarte" — muy cerca de la cámara</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>Pausa de 1 segundo después de "And it does" antes de continuar</span></div>
-              </div>
-            </div>
-            <div class="role-block dira">
-              <div class="role-tag">Nosotros nos encargamos</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Texto en pantalla: "The inspection protects you… right? 👀"</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>La música entra suave después de los primeros 2 segundos</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="scene">
-        <div class="scene-left">
-          <div class="scene-num sn-english">2</div>
-          <div class="scene-time">5 – 15 seg</div>
-        </div>
-        <div class="scene-right">
-          <h3>💡 La Revelación</h3>
-          <div class="scene-script">"An inspection tells you what's wrong with the house. It doesn't tell you if the seller has to fix it. That part is negotiation."</div>
-          <div class="role-blocks">
-            <div class="role-block anita">
-              <div class="role-tag">Anita</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Tono calmado y seguro — como alguien que sabe más que tú pero no lo presume</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>Al decir "negotiation" — mira directo a la cámara y haz una pausa breve</span></div>
-              </div>
-            </div>
-            <div class="role-block dira">
-              <div class="role-tag">Nosotros nos encargamos</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Texto en pantalla: "❌ The seller doesn't have to fix anything"</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>Subtítulos y edición de cortes para mantener el ritmo</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="scene">
-        <div class="scene-left">
-          <div class="scene-num sn-english">3</div>
-          <div class="scene-time">15 – 24 seg</div>
-        </div>
-        <div class="scene-right">
-          <h3>📖 Los Ejemplos Reales</h3>
-          <div class="scene-script">"I've seen buyers walk away from a great home over a $400 repair… And I've seen buyers accept a house full of problems because nobody pushed back."</div>
-          <div class="role-blocks">
-            <div class="role-block anita">
-              <div class="role-tag">Anita</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Cara de decepción suave al primer ejemplo, luego preocupación en el segundo</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>Habla como si estuvieras contando algo que de verdad pasó — porque probablemente sí pasó</span></div>
-              </div>
-            </div>
-            <div class="role-block dira">
-              <div class="role-tag">Nosotros nos encargamos</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Texto en pantalla: "Both could've been avoided 😔"</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>Corte de edición entre los dos ejemplos para darle impacto</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="scene">
-        <div class="scene-left">
-          <div class="scene-num sn-english">4</div>
-          <div class="scene-time">24 – 30 seg</div>
-        </div>
-        <div class="scene-right">
-          <h3>🎯 Cierre con Autoridad</h3>
-          <div class="scene-script">"The inspection is just information. What you do with it — that's where your agent either saves you money or costs you it."</div>
-          <div class="role-blocks">
-            <div class="role-block anita">
-              <div class="role-tag">Anita</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Habla lento — cada palabra cuenta aquí, sin apuro</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>Termina mirando directo a la cámara con calma. Sin sonrisa forzada — solo autoridad</span></div>
-              </div>
-            </div>
-            <div class="role-block dira">
-              <div class="role-tag">Nosotros nos encargamos</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Texto final: "Your agent = your protection 🏡"</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>Nombre, handle de Instagram y branding de cierre</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <button class="copy-btn" onclick="copyScript('script1', this)">
+      <span class="copy-icon">⧉</span> Copy Script
+    </button>
   </div>
 
-  <div class="divider"></div>
-
-  <!-- ══════════════════════════════════ -->
-  <!-- VIDEO 2 — ESPAÑOL STORYTELLING    -->
-  <!-- ══════════════════════════════════ -->
-  <div class="video-block">
-
-    <div class="video-header vh-spanish1">
-      <div class="num">02</div>
-      <div class="vh-meta">
-        <h2>"La Pareja que Perdió Tres Casas<br>y Cómo Lo Arreglamos"</h2>
-        <div class="tags">
-          <span class="tag">Storytelling</span>
-          <span class="tag">Alto potencial de comentarios</span>
-          <span class="tag">25–35 seg</span>
+  <!-- VIDEO 02 — ESPAÑOL STORYTELLING -->
+  <div class="script-card" data-lang="es">
+    <div class="card-header ch-v2">
+      <div class="card-num">02</div>
+      <div class="card-meta">
+        <h2>"La Pareja que Perdió Tres Casas y Cómo Lo Arreglamos"</h2>
+        <div class="card-tags">
+          <span class="card-tag">Storytelling</span>
+          <span class="card-tag">25–35 seg</span>
         </div>
       </div>
-      <div class="lang-tag">🇪🇸 Español</div>
+      <div class="lang-pill">🇪🇸 Español</div>
     </div>
 
-    <div class="song-bar sb-spanish1">
+    <div class="song-bar sb-v2">
       <div class="song-disc">🎵</div>
-      <span class="song-label">Música</span>
+      <span class="song-lbl">Música</span>
       <span class="song-name">"Lo Que Siento" – Cuco <em>(versión completa)</em></span>
-      <span class="song-why">Emotiva y tranquila — acompaña el relato sin distraer</span>
     </div>
 
-    <div class="full-script fs-spanish1">
-      <div class="script-label">📄 Tu Script — Lo que vas a decir</div>
-      <div class="script-text">Una pareja me llamó desesperada. Habían perdido tres casas seguidas. Tres ofertas. Tres rechazos.
+    <div class="script-body sb-border-v2">
+      <div class="script-label">📄 Tu Script</div>
+      <div class="script-text" id="script2">Una pareja me llamó desesperada. Habían perdido tres casas seguidas. Tres ofertas. Tres rechazos.
 
 No entendían por qué. Sus finanzas estaban bien. Su crédito estaba bien. La oferta era justa.
 
@@ -812,150 +535,34 @@ Comprar una casa no es solo una transacción de números.
 Es saber exactamente cómo moverte en el momento correcto.</div>
     </div>
 
-    <div class="scenes-wrapper">
-      <div class="scenes-title">🎬 Escenas</div>
-
-      <div class="scene">
-        <div class="scene-left">
-          <div class="scene-num sn-spanish1">1</div>
-          <div class="scene-time">0 – 5 seg</div>
-        </div>
-        <div class="scene-right">
-          <h3>🎣 Hook con Tensión</h3>
-          <div class="scene-script">"Una pareja me llamó desesperada. Habían perdido tres casas seguidas. Tres ofertas. Tres rechazos."</div>
-          <div class="role-blocks">
-            <div class="role-block anita" style="border-left-color: var(--red); background: rgba(212,31,31,0.06);">
-              <div class="role-tag" style="color: var(--red);">Anita</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot" style="background: var(--red);"></div><span>Cara seria, voz baja — como si estuvieras contando algo que aún te pesa</span></div>
-                <div class="role-item"><div class="ri-dot" style="background: var(--red);"></div><span>"Tres ofertas. Tres rechazos." — pausa entre cada frase, lento y marcado</span></div>
-              </div>
-            </div>
-            <div class="role-block dira" style="border-left-color: var(--blue-mid); background: rgba(10,47,168,0.06);">
-              <div class="role-tag" style="color: var(--blue-mid);">Nosotros nos encargamos</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot" style="background: var(--blue-mid);"></div><span>Texto en pantalla: "3 ofertas. 3 rechazos. 😔"</span></div>
-                <div class="role-item"><div class="ri-dot" style="background: var(--blue-mid);"></div><span>Música entra muy suave — casi imperceptible al principio</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="scene">
-        <div class="scene-left">
-          <div class="scene-num sn-spanish1">2</div>
-          <div class="scene-time">5 – 14 seg</div>
-        </div>
-        <div class="scene-right">
-          <h3>🔍 El Problema Real</h3>
-          <div class="scene-script">"No entendían por qué. Sus finanzas estaban bien. Su crédito estaba bien. El problema no era el dinero. Era cómo estaban presentando la oferta."</div>
-          <div class="role-blocks">
-            <div class="role-block anita" style="border-left-color: var(--red); background: rgba(212,31,31,0.06);">
-              <div class="role-tag" style="color: var(--red);">Anita</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot" style="background: var(--red);"></div><span>Tono de "te voy a revelar algo que no sabías" — genera curiosidad y engancha</span></div>
-                <div class="role-item"><div class="ri-dot" style="background: var(--red);"></div><span>Énfasis fuerte en "No era el dinero" — esa frase es la que detiene el scroll</span></div>
-              </div>
-            </div>
-            <div class="role-block dira" style="border-left-color: var(--blue-mid); background: rgba(10,47,168,0.06);">
-              <div class="role-tag" style="color: var(--blue-mid);">Nosotros nos encargamos</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot" style="background: var(--blue-mid);"></div><span>Texto en pantalla grande: "No era el dinero 👀"</span></div>
-                <div class="role-item"><div class="ri-dot" style="background: var(--blue-mid);"></div><span>Subtítulos y ritmo de edición para mantener la tensión</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="scene">
-        <div class="scene-left">
-          <div class="scene-num sn-spanish1">3</div>
-          <div class="scene-time">14 – 22 seg</div>
-        </div>
-        <div class="scene-right">
-          <h3>💡 La Solución</h3>
-          <div class="scene-script">"Cambiamos la estrategia. Escribimos una carta personal al vendedor. Ajustamos los términos — no el precio. La siguiente casa que ofertaron — la consiguieron."</div>
-          <div class="role-blocks">
-            <div class="role-block anita" style="border-left-color: var(--red); background: rgba(212,31,31,0.06);">
-              <div class="role-tag" style="color: var(--red);">Anita</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot" style="background: var(--red);"></div><span>Aquí el tono cambia — de tensión a alivio y confianza</span></div>
-                <div class="role-item"><div class="ri-dot" style="background: var(--red);"></div><span>Sonríe ligeramente al decir "la consiguieron" — natural, no exagerado</span></div>
-              </div>
-            </div>
-            <div class="role-block dira" style="border-left-color: var(--blue-mid); background: rgba(10,47,168,0.06);">
-              <div class="role-tag" style="color: var(--blue-mid);">Nosotros nos encargamos</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot" style="background: var(--blue-mid);"></div><span>Texto en pantalla: "✅ La siguiente… la consiguieron."</span></div>
-                <div class="role-item"><div class="ri-dot" style="background: var(--blue-mid);"></div><span>Si tienes foto del closing, nos la mandas y la incluimos aquí</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="scene">
-        <div class="scene-left">
-          <div class="scene-num sn-spanish1">4</div>
-          <div class="scene-time">22 – 30 seg</div>
-        </div>
-        <div class="scene-right">
-          <h3>🎯 Cierre con Autoridad</h3>
-          <div class="scene-script">"Comprar una casa no es solo una transacción de números. Es saber exactamente cómo moverte en el momento correcto."</div>
-          <div class="role-blocks">
-            <div class="role-block anita" style="border-left-color: var(--red); background: rgba(212,31,31,0.06);">
-              <div class="role-tag" style="color: var(--red);">Anita</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot" style="background: var(--red);"></div><span>Habla lento con peso — este es el momento más poderoso del video</span></div>
-                <div class="role-item"><div class="ri-dot" style="background: var(--red);"></div><span>Termina mirando a cámara fijo — 2 segundos de silencio después de la última frase</span></div>
-              </div>
-            </div>
-            <div class="role-block dira" style="border-left-color: var(--blue-mid); background: rgba(10,47,168,0.06);">
-              <div class="role-tag" style="color: var(--blue-mid);">Nosotros nos encargamos</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot" style="background: var(--blue-mid);"></div><span>Texto: "Es saber cómo moverte. 🏡"</span></div>
-                <div class="role-item"><div class="ri-dot" style="background: var(--blue-mid);"></div><span>Nombre, handle de Instagram y branding de cierre</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <button class="copy-btn" onclick="copyScript('script2', this)">
+      <span class="copy-icon">⧉</span> Copiar Script
+    </button>
   </div>
 
-  <div class="divider"></div>
-
-  <!-- ══════════════════════════════════ -->
-  <!-- VIDEO 3 — ESPAÑOL TIMELINE        -->
-  <!-- ══════════════════════════════════ -->
-  <div class="video-block">
-
-    <div class="video-header vh-spanish2">
-      <div class="num">03</div>
-      <div class="vh-meta">
-        <h2>"Lo Que Nadie Te Dice que Pasa<br>Después de Firmar el Contrato"</h2>
-        <div class="tags">
-          <span class="tag">Timeline / Proceso</span>
-          <span class="tag">Alto potencial de saves</span>
-          <span class="tag">30–40 seg</span>
+  <!-- VIDEO 03 — ESPAÑOL TIMELINE -->
+  <div class="script-card" data-lang="es">
+    <div class="card-header ch-v3">
+      <div class="card-num">03</div>
+      <div class="card-meta">
+        <h2>"Lo Que Nadie Te Dice que Pasa Después de Firmar el Contrato"</h2>
+        <div class="card-tags">
+          <span class="card-tag">Timeline</span>
+          <span class="card-tag">30–40 seg</span>
         </div>
       </div>
-      <div class="lang-tag">🇪🇸 Español</div>
+      <div class="lang-pill">🇪🇸 Español</div>
     </div>
 
-    <div class="song-bar sb-spanish2">
+    <div class="song-bar sb-v3">
       <div class="song-disc">🎵</div>
-      <span class="song-label">Música</span>
+      <span class="song-lbl">Música</span>
       <span class="song-name">"Hawái" – Maluma <em>(instrumental)</em></span>
-      <span class="song-why">Familiar para audiencia latina, ritmo tranquilo y no distrae</span>
     </div>
 
-    <div class="full-script fs-spanish2">
-      <div class="script-label">📄 Tu Script — Lo que vas a decir</div>
-      <div class="script-text">Nadie te dice lo que pasa realmente entre el día que encuentras tu casa y el día que recibes tus llaves.
+    <div class="script-body sb-border-v3">
+      <div class="script-label">📄 Tu Script</div>
+      <div class="script-text" id="script3">Nadie te dice lo que pasa realmente entre el día que encuentras tu casa y el día que recibes tus llaves.
 
 La primera semana es emoción — oferta aceptada, todo se siente perfecto.
 
@@ -976,162 +583,57 @@ Todo ese proceso tiene momentos donde algo puede salir mal.
 Mi trabajo es asegurarme de que nada lo haga.</div>
     </div>
 
-    <div class="scenes-wrapper">
-      <div class="scenes-title">🎬 Escenas</div>
-
-      <div class="scene">
-        <div class="scene-left">
-          <div class="scene-num sn-spanish2">1</div>
-          <div class="scene-time">0 – 4 seg</div>
-        </div>
-        <div class="scene-right">
-          <h3>🎣 Hook — La Promesa</h3>
-          <div class="scene-script">"Nadie te dice lo que pasa realmente entre el día que encuentras tu casa y el día que recibes tus llaves."</div>
-          <div class="role-blocks">
-            <div class="role-block anita block-purple">
-              <div class="role-tag">Anita</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Cara de "tengo información que necesitas" — cejas ligeramente levantadas, voz calmada</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>Énfasis en la palabra "realmente" — es la que le dice al espectador que esto es diferente</span></div>
-              </div>
-            </div>
-            <div class="role-block dira block-purple">
-              <div class="role-tag">Nosotros nos encargamos</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Texto en pantalla: "Lo que pasa DESPUÉS de que dices sí 🏡"</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>Música entra suave desde el inicio</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="scene">
-        <div class="scene-left">
-          <div class="scene-num sn-spanish2">2</div>
-          <div class="scene-time">4 – 14 seg</div>
-        </div>
-        <div class="scene-right">
-          <h3>📅 Semanas 1 y 2</h3>
-          <div class="scene-script">"La primera semana es emoción — oferta aceptada, todo se siente perfecto. La segunda semana llega la inspección. Aquí es donde muchos compradores entran en pánico por primera vez."</div>
-          <div class="role-blocks">
-            <div class="role-block anita block-purple">
-              <div class="role-tag">Anita</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Semana 1: sonríe — transmite esa emoción genuina de "lo lograste"</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>Semana 2: baja el tono ligeramente y pon cara más seria — ese cambio es clave</span></div>
-              </div>
-            </div>
-            <div class="role-block dira block-purple">
-              <div class="role-tag">Nosotros nos encargamos</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Texto en pantalla: "Semana 1: ✅ | Semana 2: 😬 Inspección"</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>Corte de edición entre semanas para marcar el cambio de tono</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="scene">
-        <div class="scene-left">
-          <div class="scene-num sn-spanish2">3</div>
-          <div class="scene-time">14 – 24 seg</div>
-        </div>
-        <div class="scene-right">
-          <h3>📋 Semanas 3, 4 y 5</h3>
-          <div class="scene-script">"La tercera y cuarta semana el banco empieza a pedir documentos. Muchos, y rápido. La quinta semana es la tasación. El banco decide si la casa vale lo que acordaron pagar."</div>
-          <div class="role-blocks">
-            <div class="role-block anita block-purple">
-              <div class="role-tag">Anita</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Tono neutro y directo — como alguien explicando el proceso con claridad y calma</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>Énfasis en "Muchos, y rápido" — genera empatía porque mucha gente lo ha vivido</span></div>
-              </div>
-            </div>
-            <div class="role-block dira block-purple">
-              <div class="role-tag">Nosotros nos encargamos</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Texto en pantalla: "Semana 3–4: 📄 Docs | Semana 5: 🏦 Tasación"</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>Edición de ritmo para que el timeline se sienta fluido y no apresurado</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="scene">
-        <div class="scene-left">
-          <div class="scene-num sn-spanish2">4</div>
-          <div class="scene-time">24 – 34 seg</div>
-        </div>
-        <div class="scene-right">
-          <h3>🔑 Cierre y Remate Final</h3>
-          <div class="scene-script">"Y entonces — las llaves son tuyas. Todo ese proceso tiene momentos donde algo puede salir mal. Mi trabajo es asegurarme de que nada lo haga."</div>
-          <div class="role-blocks">
-            <div class="role-block anita block-purple">
-              <div class="role-tag">Anita</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Al decir "las llaves son tuyas" — sonríe de verdad, que se sienta el alivio genuino</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>El remate final dilo con calma y confianza — como promesa real, no como slogan</span></div>
-              </div>
-            </div>
-            <div class="role-block dira block-purple">
-              <div class="role-tag">Nosotros nos encargamos</div>
-              <div class="role-items">
-                <div class="role-item"><div class="ri-dot"></div><span>Texto: "🔑 Las llaves son tuyas."</span></div>
-                <div class="role-item"><div class="ri-dot"></div><span>Nombre, handle de Instagram y branding de cierre</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════ -->
-  <!-- POSTING ORDER                     -->
-  <!-- ══════════════════════════════════ -->
-  <div class="posting-section">
-    <h2>📅 Orden de Publicación Recomendado</h2>
-    <p>Empieza con el que posiciona, luego el que emociona, cierra con el que educa.</p>
-
-    <div class="posting-steps">
-      <div class="posting-step">
-        <div class="ps-day">Día 1 · Lunes</div>
-        <div class="ps-content">
-          <strong><span class="ps-dot" style="background:#7B5FD4;"></span>Video 03 — Español · Timeline</strong>
-          <span>El más educativo. Genera saves desde el primer día y posiciona a Anita como experta del proceso.</span>
-        </div>
-      </div>
-      <div class="posting-step">
-        <div class="ps-day">Día 2 · Miércoles</div>
-        <div class="ps-content">
-          <strong><span class="ps-dot" style="background:#1A4FD8;"></span>Video 01 — English · Myth vs Reality</strong>
-          <span>Llega a la audiencia en inglés. El formato de mito que rompes genera shares y comentarios fuertes.</span>
-        </div>
-      </div>
-      <div class="posting-step">
-        <div class="ps-day">Día 3 · Viernes</div>
-        <div class="ps-content">
-          <strong><span class="ps-dot" style="background:#D41F1F;"></span>Video 02 — Español · Storytelling</strong>
-          <span>El viernes la gente está relajada y receptiva a historias. Este es el que más comentarios va a generar.</span>
-        </div>
-      </div>
-    </div>
+    <button class="copy-btn" onclick="copyScript('script3', this)">
+      <span class="copy-icon">⧉</span> Copiar Script
+    </button>
   </div>
 
 </div>
 
-<div class="brand-footer">
-  <div class="bf-logo">
-    <div class="bf-bar blue"></div>
-    <span class="bf-name">Dira Creative Studios</span>
-    <div class="bf-bar red"></div>
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-brand">
+    <div class="f-bar b"></div>
+    <span class="brand-name">Dira Creative Studios</span>
+    <div class="f-bar r"></div>
   </div>
-  <span class="bf-sub">Guía de Producción — Anita · Vol. 2</span>
-</div>
+  <p>Produced for Anita — Real Estate Agent</p>
+</footer>
+
+<script>
+  function filter(lang, btn) {
+    // Update buttons
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.className = 'filter-btn';
+    });
+    if (lang === 'all') btn.classList.add('active-all');
+    else if (lang === 'en') btn.classList.add('active-en');
+    else btn.classList.add('active-es');
+
+    // Show/hide cards
+    document.querySelectorAll('.script-card').forEach(card => {
+      if (lang === 'all' || card.dataset.lang === lang) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+
+  function copyScript(id, btn) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.innerHTML;
+      btn.classList.add('copied');
+      btn.innerHTML = '<span class="copy-icon">✓</span> Copied!';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = orig;
+      }, 2000);
+    });
+  }
+</script>
 
 </body>
 </html>
+
