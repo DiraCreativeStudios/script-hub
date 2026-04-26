@@ -6,470 +6,200 @@
 <title>Anita — My Scripts · Dira Creative Studios</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --blue:      #1A4FD8;
-    --blue-l:    #5B8EF0;
-    --blue-pale: #E8EFFF;
-    --red:       #D41F1F;
-    --red-l:     #F07070;
-    --red-pale:  #FFEAEA;
-    --purple:    #7B5FD4;
-    --pur-pale:  #F0EBFF;
-    --green:     #1A6B3A;
-    --dark:      #080C1A;
-    --dark2:     #0F1528;
-    --white:     #FFFFFF;
-    --paper:     #F4F6FB;
-    --muted:     #6B75A0;
-  }
+  :root{--blue:#1A4FD8;--blue-l:#5B8EF0;--red:#D41F1F;--red-l:#F07070;--purple:#7B5FD4;--green:#1A6B3A;--green-bg:#E8F5EF;--amber:#D97706;--dark:#080C1A;--dark2:#0F1528;--paper2:#E9EDF8;--white:#FFFFFF;--muted:#6B75A0;--ink:#0D1230}
+  *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+  body{background:var(--dark);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 32px;overflow:hidden}
+  .hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 20% 50%,rgba(26,79,216,.2) 0%,transparent 60%),radial-gradient(ellipse 60% 60% at 80% 50%,rgba(212,31,31,.15) 0%,transparent 60%)}
+  .hero-bg{position:absolute;font-family:'Cormorant Garamond',serif;font-size:clamp(120px,22vw,300px);font-weight:700;color:rgba(255,255,255,.022);letter-spacing:-8px;user-select:none;white-space:nowrap;top:50%;transform:translateY(-50%);pointer-events:none}
+  .dira-tag{display:inline-flex;align-items:center;gap:10px;margin-bottom:28px;animation:fadeUp .8s ease both}
+  .dira-tag .dot{width:8px;height:8px;border-radius:50%}.dira-tag .dot.b{background:var(--blue-l)}.dira-tag .dot.r{background:var(--red-l)}
+  .dira-tag span{color:rgba(255,255,255,.4);font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase}
+  .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,9vw,110px);font-weight:700;line-height:1;letter-spacing:-2px;animation:fadeUp .8s .1s ease both}
+  .hero h1 em{font-style:italic;background:linear-gradient(90deg,var(--blue-l),var(--red-l));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .hero-sub{margin-top:18px;color:rgba(255,255,255,.35);font-size:15px;font-weight:300;max-width:480px;line-height:1.6;animation:fadeUp .8s .2s ease both}
+  .filter-bar{display:flex;justify-content:center;gap:8px;margin-top:44px;flex-wrap:wrap;animation:fadeUp .8s .3s ease both}
+  .filter-btn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border-radius:3px;cursor:pointer;transition:all .2s}
+  .filter-btn:hover{border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.7)}
+  .filter-btn.active-all{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);color:#fff}
+  .filter-btn.active-en{background:rgba(26,79,216,.25);border-color:var(--blue-l);color:var(--blue-l)}
+  .filter-btn.active-es{background:rgba(212,31,31,.2);border-color:var(--red-l);color:var(--red-l)}
+  .scroll-hint{margin-top:56px;color:rgba(255,255,255,.18);font-size:11px;letter-spacing:2px;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp .8s .5s ease both}
+  .scroll-arrow{font-size:18px;animation:bounce 2s infinite}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
-  body {
-    background: var(--dark);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+  /* VIDEO CARDS */
+  .videos-section{position:relative;z-index:1;padding:0 24px 60px;max-width:900px;margin:0 auto}
+  .video-block{margin-bottom:72px;animation:fadeUp .6s ease both}
+  .video-block:nth-child(1){animation-delay:.1s}.video-block:nth-child(2){animation-delay:.2s}.video-block:nth-child(3){animation-delay:.3s}
+  .video-block.hidden{display:none}
+  .vid-header{padding:28px 36px;display:grid;grid-template-columns:80px 1fr auto;gap:20px;align-items:center;border-radius:8px 8px 0 0;position:relative;overflow:hidden}
+  .vid-header::after{content:'';position:absolute;right:-30px;top:-30px;width:180px;height:180px;border-radius:50%;opacity:.07}
+  .vh-en{background:linear-gradient(135deg,#071840,#0E2A7A)}.vh-en::after{background:var(--blue)}
+  .vh-es1{background:linear-gradient(135deg,#2A0808,#5A1010)}.vh-es1::after{background:var(--red)}
+  .vh-es2{background:linear-gradient(135deg,#150A2D,#2A1255)}.vh-es2::after{background:var(--purple)}
+  .vid-num{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:700;line-height:1}
+  .vh-en .vid-num{color:var(--blue-l)}.vh-es1 .vid-num{color:var(--red-l)}.vh-es2 .vid-num{color:#C3A8FF}
+  .vid-meta h2{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:8px}
+  .vid-tags{display:flex;gap:6px;flex-wrap:wrap}
+  .vid-tag{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:2px;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.4)}
+  .lang-pill{font-size:11px;font-weight:700;padding:6px 14px;border-radius:4px;white-space:nowrap;align-self:flex-start}
+  .vh-en .lang-pill{background:rgba(26,79,216,.3);color:var(--blue-l);border:1px solid rgba(91,142,240,.4)}
+  .vh-es1 .lang-pill{background:rgba(212,31,31,.25);color:var(--red-l);border:1px solid rgba(240,112,112,.4)}
+  .vh-es2 .lang-pill{background:rgba(123,95,212,.25);color:#C3A8FF;border:1px solid rgba(195,168,255,.4)}
+  .song-bar{padding:13px 36px;display:flex;align-items:center;gap:12px;border-left:3px solid}
+  .sb-en{background:#06102A;border-color:var(--blue)}.sb-es1{background:#1A0606;border-color:var(--red)}.sb-es2{background:#0E0820;border-color:var(--purple)}
+  .song-disc{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;animation:spin 5s linear infinite}
+  .sb-en .song-disc{background:rgba(91,142,240,.15)}.sb-es1 .song-disc{background:rgba(212,31,31,.15)}.sb-es2 .song-disc{background:rgba(123,95,212,.15)}
+  @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  .song-lbl{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;flex-shrink:0}
+  .sb-en .song-lbl{color:var(--blue-l)}.sb-es1 .song-lbl{color:var(--red-l)}.sb-es2 .song-lbl{color:#A07FE8}
+  .song-name{color:rgba(255,255,255,.8);font-size:13px;flex:1}
+  .song-name em{color:rgba(255,255,255,.3);font-style:normal;font-size:12px}
+  .script-block{background:#fff;padding:28px 36px;border-left:4px solid}
+  .sbl-en{border-color:var(--blue)}.sbl-es1{border-color:var(--red)}.sbl-es2{border-color:var(--purple)}
+  .block-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+  .sbl-en .block-label{color:var(--blue)}.sbl-es1 .block-label{color:var(--red)}.sbl-es2 .block-label{color:var(--purple)}
+  .script-text{font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.85;color:var(--ink);white-space:pre-line}
 
-  /* ── BACKGROUND GRAIN ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
+  /* SCENES */
+  .scenes-wrapper{background:var(--paper2)}
+  .scenes-header{padding:22px 36px 0;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+  .scene{display:grid;grid-template-columns:100px 1fr;border-bottom:1px solid rgba(10,47,168,.08);transition:background .2s}
+  .scene:last-child{border-bottom:none}
+  .scene.has-changes{background:rgba(217,119,6,.04)}
+  .scene-left{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:24px 12px;background:rgba(0,0,0,.03);gap:6px;position:relative;transition:background .2s}
+  .scene.has-changes .scene-left{background:rgba(217,119,6,.06)}
+  .scene-num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;position:relative}
+  .sn-en{background:var(--blue)}.sn-es1{background:var(--red)}.sn-es2{background:var(--purple)}
+  .changed-dot{position:absolute;top:-2px;right:-2px;width:10px;height:10px;border-radius:50%;background:var(--amber);border:2px solid var(--paper2);display:none}
+  .scene.has-changes .changed-dot{display:block}
+  .scene-time{font-size:11px;color:var(--muted);font-weight:500;text-align:center}
+  .scene-right{padding:24px 28px 20px 20px}
+  .scene-title{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
 
-  /* ── HERO ── */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 60px 32px;
-    overflow: hidden;
-  }
+  /* SCENE SCRIPT — EDITABLE */
+  .scene-script-wrap{position:relative;margin-bottom:14px}
+  .scene-script-original{background:var(--white);padding:12px 16px;border-radius:4px 4px 0 0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;line-height:1.6;color:var(--ink);border-left:2px solid rgba(10,47,168,.1);border-bottom:none}
+  .edit-bar{display:flex;align-items:center;justify-content:space-between;background:#F0F4FF;padding:6px 12px;border:1px solid rgba(26,79,216,.15);border-top:1px dashed rgba(26,79,216,.2)}
+  .edit-bar-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);opacity:.7}
+  .edit-reset{background:none;border:none;font-size:11px;color:rgba(26,79,216,.5);cursor:pointer;padding:2px 6px;border-radius:2px;font-family:'DM Sans',sans-serif;transition:all .2s}
+  .edit-reset:hover{color:var(--red);background:rgba(212,31,31,.06)}
+  .edit-reset.hidden{display:none}
+  .scene-edit-ta{width:100%;background:var(--white);border:1px solid rgba(26,79,216,.2);border-top:none;border-radius:0 0 4px 4px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;line-height:1.6;color:var(--ink);padding:12px 16px;resize:vertical;outline:none;transition:border-color .2s;min-height:60px}
+  .scene-edit-ta:focus{border-color:rgba(26,79,216,.4);background:#FAFCFF}
+  .scene-edit-ta.is-changed{border-color:var(--amber);background:#FFFBF0}
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 20% 50%, rgba(26,79,216,0.2) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 60% at 80% 50%, rgba(212,31,31,0.15) 0%, transparent 60%);
-    pointer-events: none;
-  }
+  /* DIFF PREVIEW */
+  .diff-preview{display:none;background:#fff;border:1px solid rgba(217,119,6,.3);border-top:none;border-radius:0 0 4px 4px;padding:10px 16px;font-family:'Cormorant Garamond',serif;font-size:14px;line-height:1.7}
+  .diff-preview.visible{display:block}
+  .diff-preview .d-label{font-family:'DM Sans',sans-serif;font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:6px}
+  .d-same{color:var(--ink)}
+  .d-add{color:#166534;background:#DCFCE7;border-radius:2px;padding:0 2px}
+  .d-del{color:#991B1B;background:#FEE2E2;text-decoration:line-through;border-radius:2px;padding:0 2px}
 
-  .hero-bg-text {
-    position: absolute;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(120px, 20vw, 280px);
-    font-weight: 700;
-    color: rgba(255,255,255,0.025);
-    letter-spacing: -8px;
-    user-select: none;
-    white-space: nowrap;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
+  /* ROLE BLOCKS */
+  .role-block{border-radius:4px;padding:10px 14px;margin-bottom:8px}
+  .role-block:last-child{margin-bottom:0}
+  .role-block.client-en{background:rgba(26,79,216,.07);border-left:3px solid var(--blue)}
+  .role-block.client-es1{background:rgba(212,31,31,.06);border-left:3px solid var(--red)}
+  .role-block.client-es2{background:rgba(123,95,212,.07);border-left:3px solid var(--purple)}
+  .role-block.dira{background:rgba(212,31,31,.05);border-left:3px solid var(--blue)}
+  .role-block.location{background:var(--green-bg);border-left:3px solid var(--green)}
+  .role-tag{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;display:block}
+  .client-en .role-tag{color:var(--blue)}.client-es1 .role-tag{color:var(--red)}.client-es2 .role-tag{color:var(--purple)}
+  .dira .role-tag{color:var(--blue)}.location .role-tag{color:var(--green)}
+  .role-items{display:flex;flex-direction:column;gap:4px}
+  .role-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#2A3260;line-height:1.45}
+  .location .role-item{color:#1A3A28}
+  .ri-dot{width:4px;height:4px;border-radius:50%;margin-top:7px;flex-shrink:0}
+  .client-en .ri-dot{background:var(--blue)}.client-es1 .ri-dot{background:var(--red)}.client-es2 .ri-dot{background:var(--purple)}
+  .dira .ri-dot{background:var(--blue)}.location .ri-dot{background:var(--green)}
 
-  .dira-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 28px;
-    position: relative;
-    animation: fadeUp 0.8s ease both;
-  }
+  /* CARD FOOTER */
+  .card-footer{display:flex;border-radius:0 0 8px 8px;overflow:hidden}
+  .copy-btn{display:flex;align-items:center;gap:8px;background:var(--dark);border:none;color:rgba(255,255,255,.4);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:14px 28px;cursor:pointer;flex:1;transition:all .2s;border-top:1px solid rgba(255,255,255,.05)}
+  .copy-btn:hover{background:#0D1230;color:rgba(255,255,255,.7)}.copy-btn.copied{color:#6ABF8E}
 
-  .dira-tag .dot { width: 8px; height: 8px; border-radius: 50%; }
-  .dira-tag .dot.b { background: var(--blue-l); }
-  .dira-tag .dot.r { background: var(--red-l); }
-  .dira-tag span {
-    color: rgba(255,255,255,0.45);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-  }
+  /* FLOATING SEND */
+  .send-fab{position:fixed;bottom:28px;right:28px;z-index:100;background:linear-gradient(135deg,#1A2C6B,#0A1A50);border:1px solid rgba(91,142,240,.3);border-radius:50px;color:rgba(255,255,255,.4);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px;padding:14px 24px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.4);transition:all .3s;display:flex;align-items:center;gap:8px}
+  .send-fab .fab-icon{font-size:16px}
+  .send-fab:hover{color:rgba(255,255,255,.7);border-color:rgba(91,142,240,.5);box-shadow:0 6px 28px rgba(0,0,0,.5)}
+  .send-fab.active{background:linear-gradient(135deg,var(--blue),#0E2FA8);color:#fff;border-color:transparent;box-shadow:0 8px 32px rgba(26,79,216,.5)}
+  .send-fab.active:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(26,79,216,.6)}
+  .fab-badge{background:var(--amber);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:10px;display:none}
+  .send-fab.active .fab-badge{display:inline-block}
 
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 9vw, 110px);
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -2px;
-    position: relative;
-    animation: fadeUp 0.8s 0.1s ease both;
-  }
+  /* POSTING ORDER */
+  .posting-section{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 24px 60px}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(26,79,216,.4),rgba(212,31,31,.3),transparent);margin-bottom:36px}
+  .section-head h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:#fff;margin-bottom:6px}
+  .section-head p{color:rgba(255,255,255,.3);font-size:14px;font-style:italic;margin-bottom:24px}
+  .posting-steps{display:flex;flex-direction:column;gap:14px}
+  .posting-step{display:grid;grid-template-columns:120px 1fr;border-radius:6px;overflow:hidden}
+  .ps-day{background:var(--dark2);padding:20px 16px;display:flex;align-items:center;justify-content:center;text-align:center}
+  .ps-day span{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-l);line-height:1.6}
+  .ps-content{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-left:none;padding:18px 24px}
+  .ps-content strong{display:flex;align-items:center;gap:8px;color:#fff;font-size:14px;margin-bottom:4px}
+  .ps-dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
+  .ps-content p{color:rgba(255,255,255,.3);font-size:13px}
 
-  .hero h1 em {
-    font-style: italic;
-    background: linear-gradient(90deg, var(--blue-l), var(--red-l));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  /* FOOTER */
+  footer{text-align:center;padding:40px 24px 100px;border-top:1px solid rgba(255,255,255,.05);position:relative;z-index:1}
+  .footer-brand{display:inline-flex;align-items:center;gap:12px;margin-bottom:8px}
+  .f-bar{width:36px;height:2px;border-radius:2px}.f-bar.b{background:var(--blue)}.f-bar.r{background:var(--red)}
+  footer .brand-name{color:rgba(255,255,255,.4);font-weight:600;letter-spacing:3px;text-transform:uppercase;font-size:12px}
+  footer p{color:rgba(255,255,255,.18);font-size:12px;letter-spacing:1px}
 
-  .hero-sub {
-    margin-top: 20px;
-    color: rgba(255,255,255,0.35);
-    font-size: 15px;
-    font-weight: 300;
-    letter-spacing: 0.5px;
-    position: relative;
-    animation: fadeUp 0.8s 0.2s ease both;
-  }
-
-  /* ── FILTER TABS ── */
-  .filter-bar {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 48px;
-    flex-wrap: wrap;
-    position: relative;
-    animation: fadeUp 0.8s 0.3s ease both;
-  }
-
-  .filter-btn {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.45);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 10px 20px;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .filter-btn:hover { border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); }
-  .filter-btn.active-all  { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: #fff; }
-  .filter-btn.active-en   { background: rgba(26,79,216,0.25); border-color: var(--blue-l); color: var(--blue-l); }
-  .filter-btn.active-es   { background: rgba(212,31,31,0.2); border-color: var(--red-l); color: var(--red-l); }
-
-  .scroll-hint {
-    margin-top: 60px;
-    color: rgba(255,255,255,0.2);
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    animation: fadeUp 0.8s 0.5s ease both;
-  }
-
-  .scroll-arrow { font-size: 18px; animation: bounce 2s infinite; }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(6px); }
-  }
-
-  /* ── SCRIPTS SECTION ── */
-  .scripts-section {
-    position: relative;
-    z-index: 1;
-    padding: 0 24px 100px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-
-  /* ── SCRIPT CARD ── */
-  .script-card {
-    margin-bottom: 48px;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .script-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  }
-
-  .script-card.hidden { display: none; }
-
-  /* Card header */
-  .card-header {
-    padding: 28px 36px;
-    display: grid;
-    grid-template-columns: 80px 1fr auto;
-    gap: 20px;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .card-header::after {
-    content: '';
-    position: absolute;
-    right: -30px; top: -30px;
-    width: 180px; height: 180px;
-    border-radius: 50%;
-    opacity: 0.07;
-  }
-
-  .ch-v1 { background: linear-gradient(135deg, #071840, #0E2A7A); }
-  .ch-v1::after { background: var(--blue); }
-
-  .ch-v2 { background: linear-gradient(135deg, #2A0808, #5A1010); }
-  .ch-v2::after { background: var(--red); }
-
-  .ch-v3 { background: linear-gradient(135deg, #150A2D, #2A1255); }
-  .ch-v3::after { background: var(--purple); }
-
-  .card-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 1;
-  }
-
-  .ch-v1 .card-num { color: var(--blue-l); }
-  .ch-v2 .card-num { color: var(--red-l); }
-  .ch-v3 .card-num { color: #C3A8FF; }
-
-  .card-meta h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.3;
-    margin-bottom: 8px;
-  }
-
-  .card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-
-  .card-tag {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 3px 9px;
-    border-radius: 2px;
-    border: 1px solid rgba(255,255,255,0.12);
-    color: rgba(255,255,255,0.4);
-  }
-
-  .lang-pill {
-    font-size: 11px;
-    font-weight: 700;
-    padding: 6px 14px;
-    border-radius: 4px;
-    white-space: nowrap;
-    align-self: flex-start;
-  }
-
-  .ch-v1 .lang-pill { background: rgba(26,79,216,0.3); color: var(--blue-l); border: 1px solid rgba(91,142,240,0.4); }
-  .ch-v2 .lang-pill { background: rgba(212,31,31,0.25); color: var(--red-l); border: 1px solid rgba(240,112,112,0.4); }
-  .ch-v3 .lang-pill { background: rgba(123,95,212,0.25); color: #C3A8FF; border: 1px solid rgba(195,168,255,0.4); }
-
-  /* Song bar */
-  .song-bar {
-    padding: 13px 36px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-left: 3px solid;
-  }
-
-  .sb-v1 { background: #06102A; border-color: var(--blue); }
-  .sb-v2 { background: #1A0606; border-color: var(--red); }
-  .sb-v3 { background: #0E0820; border-color: var(--purple); }
-
-  .song-disc {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px;
-    flex-shrink: 0;
-    animation: spin 5s linear infinite;
-  }
-
-  .sb-v1 .song-disc { background: rgba(91,142,240,0.15); }
-  .sb-v2 .song-disc { background: rgba(212,31,31,0.15); }
-  .sb-v3 .song-disc { background: rgba(123,95,212,0.15); }
-
-  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-  .song-lbl {
-    font-size: 9px; font-weight: 800;
-    letter-spacing: 2px; text-transform: uppercase; flex-shrink: 0;
-  }
-
-  .sb-v1 .song-lbl { color: var(--blue-l); }
-  .sb-v2 .song-lbl { color: var(--red-l); }
-  .sb-v3 .song-lbl { color: #A07FE8; }
-
-  .song-name { color: rgba(255,255,255,0.8); font-size: 13px; flex: 1; }
-  .song-name em { color: rgba(255,255,255,0.3); font-style: normal; font-size: 12px; }
-
-  /* Script body */
-  .script-body {
-    background: #fff;
-    padding: 32px 36px;
-    border-left: 4px solid;
-  }
-
-  .sb-border-v1 { border-color: var(--blue); }
-  .sb-border-v2 { border-color: var(--red); }
-  .sb-border-v3 { border-color: var(--purple); }
-
-  .script-label {
-    font-size: 10px; font-weight: 700;
-    letter-spacing: 3px; text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-
-  .sb-border-v1 .script-label { color: var(--blue); }
-  .sb-border-v2 .script-label { color: var(--red); }
-  .sb-border-v3 .script-label { color: var(--purple); }
-
-  .script-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 19px;
-    line-height: 1.85;
-    color: var(--dark);
-    white-space: pre-line;
-  }
-
-  /* Copy button */
-  .copy-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--dark);
-    border: none;
-    color: rgba(255,255,255,0.45);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 14px 36px;
-    cursor: pointer;
-    width: 100%;
-    transition: all 0.2s;
-    border-top: 1px solid rgba(255,255,255,0.05);
-  }
-
-  .copy-btn:hover { background: #0D1230; color: rgba(255,255,255,0.7); }
-  .copy-btn.copied { color: #6ABF8E; }
-  .copy-icon { font-size: 14px; }
-
-  /* ── FOOTER ── */
-  footer {
-    text-align: center;
-    padding: 40px 24px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    position: relative;
-    z-index: 1;
-  }
-
-  .footer-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 8px;
-  }
-
-  .f-bar { width: 36px; height: 2px; border-radius: 2px; }
-  .f-bar.b { background: var(--blue); }
-  .f-bar.r { background: var(--red); }
-
-  footer p { color: rgba(255,255,255,0.2); font-size: 12px; letter-spacing: 1px; }
-  footer .brand-name { color: rgba(255,255,255,0.4); font-weight: 600; letter-spacing: 3px; text-transform: uppercase; font-size: 12px; }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .script-card:nth-child(1) { animation-delay: 0.1s; }
-  .script-card:nth-child(2) { animation-delay: 0.2s; }
-  .script-card:nth-child(3) { animation-delay: 0.3s; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 600px) {
-    .card-header { grid-template-columns: 60px 1fr; gap: 12px; padding: 20px; }
-    .lang-pill { display: none; }
-    .card-num { font-size: 44px; }
-    .song-bar, .script-body, .copy-btn { padding-left: 20px; padding-right: 20px; }
-    .hero h1 { letter-spacing: -1px; }
+  @media(max-width:620px){
+    .vid-header{grid-template-columns:60px 1fr;gap:12px;padding:20px}.lang-pill{display:none}.vid-num{font-size:44px}
+    .song-bar,.script-block,.scenes-header{padding-left:20px;padding-right:20px}
+    .scene{grid-template-columns:70px 1fr}.scene-right{padding:18px 14px 16px}
+    .posting-step{grid-template-columns:90px 1fr}
+    .send-fab{bottom:16px;right:16px;font-size:12px;padding:12px 18px}
   }
 </style>
 </head>
 <body>
 
-<!-- ── HERO ── -->
+<!-- FLOATING SEND BUTTON -->
+<button class="send-fab" id="sendFab" onclick="sendEmail()">
+  <span class="fab-icon">✉</span>
+  <span>Enviar Cambios</span>
+  <span class="fab-badge" id="fabBadge">0</span>
+</button>
+
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-bg-text">ANITA</div>
-
-  <div class="dira-tag">
-    <div class="dot b"></div>
-    <span>Dira Creative Studios</span>
-    <div class="dot r"></div>
-  </div>
-
+  <div class="hero-bg">ANITA</div>
+  <div class="dira-tag"><div class="dot b"></div><span>Dira Creative Studios</span><div class="dot r"></div></div>
   <h1>My <em>Scripts</em></h1>
-
-  <p class="hero-sub">3 videos ready to record — your words, your story, your brand</p>
-
+  <p class="hero-sub">Review each scene below. Edit the script text directly if you want changes — we'll get your updates instantly.</p>
   <div class="filter-bar">
-    <button class="filter-btn active-all" onclick="filter('all', this)">All Videos</button>
-    <button class="filter-btn" onclick="filter('en', this)">🇺🇸 English</button>
-    <button class="filter-btn" onclick="filter('es', this)">🇪🇸 Español</button>
+    <button class="filter-btn active-all" onclick="filter('all',this)">All Videos</button>
+    <button class="filter-btn" onclick="filter('en',this)">🇺🇸 English</button>
+    <button class="filter-btn" onclick="filter('es',this)">🇪🇸 Español</button>
   </div>
-
-  <div class="scroll-hint">
-    <span>Scroll to your scripts</span>
-    <span class="scroll-arrow">↓</span>
-  </div>
+  <div class="scroll-hint"><span>Scroll to review your scripts</span><span class="scroll-arrow">↓</span></div>
 </section>
 
-<!-- ── SCRIPTS ── -->
-<div class="scripts-section">
+<!-- VIDEOS -->
+<div class="videos-section">
 
-  <!-- VIDEO 01 — ENGLISH -->
-  <div class="script-card" data-lang="en">
-    <div class="card-header ch-v1">
-      <div class="card-num">01</div>
-      <div class="card-meta">
-        <h2>"The Inspection Doesn't Protect You the Way You Think"</h2>
-        <div class="card-tags">
-          <span class="card-tag">Myth vs Reality</span>
-          <span class="card-tag">25–30 sec</span>
-        </div>
-      </div>
+  <!-- ═══ VIDEO 01 — ENGLISH ═══ -->
+  <div class="video-block" data-lang="en">
+    <div class="vid-header vh-en">
+      <div class="vid-num">01</div>
+      <div class="vid-meta"><h2>"The Inspection Doesn't Protect You the Way You Think"</h2><div class="vid-tags"><span class="vid-tag">Myth vs Reality</span><span class="vid-tag">25–30 sec</span></div></div>
       <div class="lang-pill">🇺🇸 English</div>
     </div>
-
-    <div class="song-bar sb-v1">
-      <div class="song-disc">🎵</div>
-      <span class="song-lbl">Music</span>
-      <span class="song-name">"Midnight Rain" – Taylor Swift <em>(instrumental)</em></span>
-    </div>
-
-    <div class="script-body sb-border-v1">
-      <div class="script-label">📄 Your Script</div>
+    <div class="song-bar sb-en"><div class="song-disc">🎵</div><span class="song-lbl">Music</span><span class="song-name">"Midnight Rain" – Taylor Swift <em>(instrumental)</em></span></div>
+    <div class="script-block sbl-en">
+      <div class="block-label">📄 Full Script</div>
       <div class="script-text" id="script1">Everyone thinks the inspection protects them. And it does — just not the way most people think.
 
 An inspection tells you what's wrong with the house. It doesn't tell you if the seller has to fix it.
@@ -488,34 +218,107 @@ The inspection is just information.
 
 What you do with it — that's where your agent either saves you money or costs you it.</div>
     </div>
+    <div class="scenes-wrapper">
+      <div class="scenes-header">🎬 Scenes — Edit any line directly below</div>
 
-    <button class="copy-btn" onclick="copyScript('script1', this)">
-      <span class="copy-icon">⧉</span> Copy Script
-    </button>
-  </div>
-
-  <!-- VIDEO 02 — ESPAÑOL STORYTELLING -->
-  <div class="script-card" data-lang="es">
-    <div class="card-header ch-v2">
-      <div class="card-num">02</div>
-      <div class="card-meta">
-        <h2>"La Pareja que Perdió Tres Casas y Cómo Lo Arreglamos"</h2>
-        <div class="card-tags">
-          <span class="card-tag">Storytelling</span>
-          <span class="card-tag">25–35 seg</span>
+      <!-- V1 S1 -->
+      <div class="scene" id="scene-v1s1">
+        <div class="scene-left"><div class="scene-num sn-en"><span class="changed-dot"></span>1</div><div class="scene-time">0–5 sec</div></div>
+        <div class="scene-right">
+          <div class="scene-title">🎣 Hook — Break the Belief</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"Everyone thinks the inspection protects them. And it does — just not the way most people think."</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Your version</span><button class="edit-reset hidden" id="reset-v1s1" onclick="resetScene('v1s1')">Reset to original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v1s1" oninput="onEdit('v1s1',this)">"Everyone thinks the inspection protects them. And it does — just not the way most people think."</textarea>
+            <div class="diff-preview" id="diff-v1s1"><div class="d-label">Preview of changes</div><div id="diff-content-v1s1"></div></div>
+          </div>
+          <div class="role-block client-en"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Serious face, very close to camera — tone of "I have something important to tell you"</span></div><div class="role-item"><div class="ri-dot"></div><span>1 second pause after "And it does" before continuing</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>On-screen text: "The inspection protects you… right? 👀"</span></div><div class="role-item"><div class="ri-dot"></div><span>Music fades in softly after the first 2 seconds</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Location</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Inside an empty property — hallway or living room with natural light</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternative: in front of a home with a for-sale sign in the background</span></div></div></div>
         </div>
       </div>
+
+      <!-- V1 S2 -->
+      <div class="scene" id="scene-v1s2">
+        <div class="scene-left"><div class="scene-num sn-en"><span class="changed-dot"></span>2</div><div class="scene-time">5–12 sec</div></div>
+        <div class="scene-right">
+          <div class="scene-title">💡 The Revelation</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"An inspection tells you what's wrong with the house. It doesn't tell you if the seller has to fix it. That part is negotiation."</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Your version</span><button class="edit-reset hidden" id="reset-v1s2" onclick="resetScene('v1s2')">Reset to original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v1s2" oninput="onEdit('v1s2',this)">"An inspection tells you what's wrong with the house. It doesn't tell you if the seller has to fix it. That part is negotiation."</textarea>
+            <div class="diff-preview" id="diff-v1s2"><div class="d-label">Preview of changes</div><div id="diff-content-v1s2"></div></div>
+          </div>
+          <div class="role-block client-en"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Calm, confident tone — like someone who knows more but doesn't show off</span></div><div class="role-item"><div class="ri-dot"></div><span>When you say "negotiation" — look directly at the camera and pause briefly</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>On-screen text: "❌ The seller doesn't have to fix anything"</span></div><div class="role-item"><div class="ri-dot"></div><span>Subtitles and edit cuts to keep the rhythm</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Location</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Walking slowly inside the property — living room or kitchen with good lighting</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternative: clean office with desk in background</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- V1 S3 -->
+      <div class="scene" id="scene-v1s3">
+        <div class="scene-left"><div class="scene-num sn-en"><span class="changed-dot"></span>3</div><div class="scene-time">12–20 sec</div></div>
+        <div class="scene-right">
+          <div class="scene-title">🔀 The 3 Options</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"Some sellers fix everything. Some fix nothing. Some give you money back at closing instead. Which one happens depends on the market, the seller, and honestly — who's negotiating for you."</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Your version</span><button class="edit-reset hidden" id="reset-v1s3" onclick="resetScene('v1s3')">Reset to original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v1s3" oninput="onEdit('v1s3',this)">"Some sellers fix everything. Some fix nothing. Some give you money back at closing instead. Which one happens depends on the market, the seller, and honestly — who's negotiating for you."</textarea>
+            <div class="diff-preview" id="diff-v1s3"><div class="d-label">Preview of changes</div><div id="diff-content-v1s3"></div></div>
+          </div>
+          <div class="role-block client-en"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Speak with confidence — you're explaining something most people don't know</span></div><div class="role-item"><div class="ri-dot"></div><span>Emphasis on "who's negotiating for you" — that line connects everything</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>On-screen text: "It depends on who negotiates for you 👀"</span></div><div class="role-item"><div class="ri-dot"></div><span>Visual cut between each of the 3 options for rhythm</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Location</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Continue walking inside the property — continuity from previous scene</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternative: exterior of the property to mark a shift in energy</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- V1 S4 -->
+      <div class="scene" id="scene-v1s4">
+        <div class="scene-left"><div class="scene-num sn-en"><span class="changed-dot"></span>4</div><div class="scene-time">20–26 sec</div></div>
+        <div class="scene-right">
+          <div class="scene-title">📖 Real Examples</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"I've seen buyers walk away from a great home over a $400 repair… And I've seen buyers accept a house full of problems because nobody pushed back."</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Your version</span><button class="edit-reset hidden" id="reset-v1s4" onclick="resetScene('v1s4')">Reset to original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v1s4" oninput="onEdit('v1s4',this)">"I've seen buyers walk away from a great home over a $400 repair… And I've seen buyers accept a house full of problems because nobody pushed back."</textarea>
+            <div class="diff-preview" id="diff-v1s4"><div class="d-label">Preview of changes</div><div id="diff-content-v1s4"></div></div>
+          </div>
+          <div class="role-block client-en"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Soft disappointment on the first example, then concern on the second</span></div><div class="role-item"><div class="ri-dot"></div><span>Talk as if you're sharing something that actually happened</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>On-screen text: "Both could've been avoided 😔"</span></div><div class="role-item"><div class="ri-dot"></div><span>Edit cut between the two examples for impact</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Location</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Your car — intimate and personal, builds trust</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternative: sitting in the living room of an empty property</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- V1 S5 -->
+      <div class="scene" id="scene-v1s5">
+        <div class="scene-left"><div class="scene-num sn-en"><span class="changed-dot"></span>5</div><div class="scene-time">26–30 sec</div></div>
+        <div class="scene-right">
+          <div class="scene-title">🎯 Close with Authority</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"The inspection is just information. What you do with it — that's where your agent either saves you money or costs you it."</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Your version</span><button class="edit-reset hidden" id="reset-v1s5" onclick="resetScene('v1s5')">Reset to original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v1s5" oninput="onEdit('v1s5',this)">"The inspection is just information. What you do with it — that's where your agent either saves you money or costs you it."</textarea>
+            <div class="diff-preview" id="diff-v1s5"><div class="d-label">Preview of changes</div><div id="diff-content-v1s5"></div></div>
+          </div>
+          <div class="role-block client-en"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Speak slowly — every word counts here, no rushing</span></div><div class="role-item"><div class="ri-dot"></div><span>End looking directly at the camera with calm authority — no forced smile</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Final text: "Your agent = your protection 🏡"</span></div><div class="role-item"><div class="ri-dot"></div><span>Anita's name, Instagram handle and closing branding</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Location</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Front door of a property — powerful visual to close</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternative: same spot as the hook for continuity</span></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer"><button class="copy-btn" onclick="copyScript('script1',this)">⧉ &nbsp; Copy Script</button></div>
+  </div>
+
+  <!-- ═══ VIDEO 02 — ESPAÑOL STORYTELLING ═══ -->
+  <div class="video-block" data-lang="es">
+    <div class="vid-header vh-es1">
+      <div class="vid-num">02</div>
+      <div class="vid-meta"><h2>"La Pareja que Perdió Tres Casas y Cómo Lo Arreglamos"</h2><div class="vid-tags"><span class="vid-tag">Storytelling</span><span class="vid-tag">25–35 seg</span></div></div>
       <div class="lang-pill">🇪🇸 Español</div>
     </div>
-
-    <div class="song-bar sb-v2">
-      <div class="song-disc">🎵</div>
-      <span class="song-lbl">Música</span>
-      <span class="song-name">"Lo Que Siento" – Cuco <em>(versión completa)</em></span>
-    </div>
-
-    <div class="script-body sb-border-v2">
-      <div class="script-label">📄 Tu Script</div>
+    <div class="song-bar sb-es1"><div class="song-disc">🎵</div><span class="song-lbl">Música</span><span class="song-name">"Lo Que Siento" – Cuco <em>(versión completa)</em></span></div>
+    <div class="script-block sbl-es1">
+      <div class="block-label">📄 Tu Script</div>
       <div class="script-text" id="script2">Una pareja me llamó desesperada. Habían perdido tres casas seguidas. Tres ofertas. Tres rechazos.
 
 No entendían por qué. Sus finanzas estaban bien. Su crédito estaba bien. La oferta era justa.
@@ -534,34 +337,107 @@ Comprar una casa no es solo una transacción de números.
 
 Es saber exactamente cómo moverte en el momento correcto.</div>
     </div>
+    <div class="scenes-wrapper">
+      <div class="scenes-header">🎬 Escenas — Edita el texto directamente si quieres cambios</div>
 
-    <button class="copy-btn" onclick="copyScript('script2', this)">
-      <span class="copy-icon">⧉</span> Copiar Script
-    </button>
-  </div>
-
-  <!-- VIDEO 03 — ESPAÑOL TIMELINE -->
-  <div class="script-card" data-lang="es">
-    <div class="card-header ch-v3">
-      <div class="card-num">03</div>
-      <div class="card-meta">
-        <h2>"Lo Que Nadie Te Dice que Pasa Después de Firmar el Contrato"</h2>
-        <div class="card-tags">
-          <span class="card-tag">Timeline</span>
-          <span class="card-tag">30–40 seg</span>
+      <!-- V2 S1 -->
+      <div class="scene" id="scene-v2s1">
+        <div class="scene-left"><div class="scene-num sn-es1"><span class="changed-dot"></span>1</div><div class="scene-time">0–5 seg</div></div>
+        <div class="scene-right">
+          <div class="scene-title">🎣 Hook con Tensión</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"Una pareja me llamó desesperada. Habían perdido tres casas seguidas. Tres ofertas. Tres rechazos."</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Tu versión</span><button class="edit-reset hidden" id="reset-v2s1" onclick="resetScene('v2s1')">Restaurar original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v2s1" oninput="onEdit('v2s1',this)">"Una pareja me llamó desesperada. Habían perdido tres casas seguidas. Tres ofertas. Tres rechazos."</textarea>
+            <div class="diff-preview" id="diff-v2s1"><div class="d-label">Vista previa de cambios</div><div id="diff-content-v2s1"></div></div>
+          </div>
+          <div class="role-block client-es1"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Cara seria, voz baja — como si estuvieras contando algo que aún te pesa</span></div><div class="role-item"><div class="ri-dot"></div><span>"Tres ofertas. Tres rechazos." — pausa entre cada frase, lento y marcado</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Texto en pantalla: "3 ofertas. 3 rechazos. 😔"</span></div><div class="role-item"><div class="ri-dot"></div><span>Música entra muy suave — casi imperceptible al principio</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Locación</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Tu carro — íntimo y personal, perfecto para historias emotivas</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternativa: cafetería tranquila con fondo desenfocado</span></div></div></div>
         </div>
       </div>
+
+      <!-- V2 S2 -->
+      <div class="scene" id="scene-v2s2">
+        <div class="scene-left"><div class="scene-num sn-es1"><span class="changed-dot"></span>2</div><div class="scene-time">5–12 seg</div></div>
+        <div class="scene-right">
+          <div class="scene-title">🔍 El Problema Real</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"No entendían por qué. Sus finanzas estaban bien. Su crédito estaba bien. La oferta era justa. El problema no era el dinero. Era cómo estaban presentando la oferta."</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Tu versión</span><button class="edit-reset hidden" id="reset-v2s2" onclick="resetScene('v2s2')">Restaurar original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v2s2" oninput="onEdit('v2s2',this)">"No entendían por qué. Sus finanzas estaban bien. Su crédito estaba bien. La oferta era justa. El problema no era el dinero. Era cómo estaban presentando la oferta."</textarea>
+            <div class="diff-preview" id="diff-v2s2"><div class="d-label">Vista previa de cambios</div><div id="diff-content-v2s2"></div></div>
+          </div>
+          <div class="role-block client-es1"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Tono de "te voy a revelar algo que no sabías"</span></div><div class="role-item"><div class="ri-dot"></div><span>Énfasis fuerte en "No era el dinero" — esa frase detiene el scroll</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Texto en pantalla grande: "No era el dinero 👀"</span></div><div class="role-item"><div class="ri-dot"></div><span>Subtítulos y ritmo de edición para mantener la tensión</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Locación</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Mismo lugar que la escena 1 — mantener la continuidad del relato</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternativa: caminando por un vecindario residencial tranquilo</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- V2 S3 -->
+      <div class="scene" id="scene-v2s3">
+        <div class="scene-left"><div class="scene-num sn-es1"><span class="changed-dot"></span>3</div><div class="scene-time">12–19 seg</div></div>
+        <div class="scene-right">
+          <div class="scene-title">🏘️ Lo que Ven los Vendedores</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"En un mercado competitivo, los vendedores no solo ven el número. Ven la historia detrás. ¿Quién es este comprador? ¿Va a cerrar? ¿Va a ser fácil trabajar con ellos?"</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Tu versión</span><button class="edit-reset hidden" id="reset-v2s3" onclick="resetScene('v2s3')">Restaurar original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v2s3" oninput="onEdit('v2s3',this)">"En un mercado competitivo, los vendedores no solo ven el número. Ven la historia detrás. ¿Quién es este comprador? ¿Va a cerrar? ¿Va a ser fácil trabajar con ellos?"</textarea>
+            <div class="diff-preview" id="diff-v2s3"><div class="d-label">Vista previa de cambios</div><div id="diff-content-v2s3"></div></div>
+          </div>
+          <div class="role-block client-es1"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Tono reflexivo — como si pensaras en voz alta lo que piensa el vendedor</span></div><div class="role-item"><div class="ri-dot"></div><span>Las 3 preguntas dícelas lento, una por una, con pausa entre cada una</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Las 3 preguntas aparecen en pantalla una por una</span></div><div class="role-item"><div class="ri-dot"></div><span>Texto: "Los vendedores no solo ven el precio 🏠"</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Locación</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Caminando por la calle frente a casas en venta</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternativa: parada frente a una propiedad evaluándola</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- V2 S4 -->
+      <div class="scene" id="scene-v2s4">
+        <div class="scene-left"><div class="scene-num sn-es1"><span class="changed-dot"></span>4</div><div class="scene-time">19–27 seg</div></div>
+        <div class="scene-right">
+          <div class="scene-title">💡 La Solución</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"Cambiamos la estrategia. Escribimos una carta personal al vendedor. Ajustamos los términos — no el precio. La siguiente casa que ofertaron — la consiguieron."</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Tu versión</span><button class="edit-reset hidden" id="reset-v2s4" onclick="resetScene('v2s4')">Restaurar original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v2s4" oninput="onEdit('v2s4',this)">"Cambiamos la estrategia. Escribimos una carta personal al vendedor. Ajustamos los términos — no el precio. La siguiente casa que ofertaron — la consiguieron."</textarea>
+            <div class="diff-preview" id="diff-v2s4"><div class="d-label">Vista previa de cambios</div><div id="diff-content-v2s4"></div></div>
+          </div>
+          <div class="role-block client-es1"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Aquí el tono cambia — de tensión a alivio y confianza</span></div><div class="role-item"><div class="ri-dot"></div><span>Sonríe ligeramente al decir "la consiguieron" — natural, no exagerado</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Texto: "✅ La siguiente… la consiguieron."</span></div><div class="role-item"><div class="ri-dot"></div><span>Si tienes foto del closing mándasela y la incluimos</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Locación</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Frente a una casa bonita en un vecindario — visual que representa el logro</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternativa: tu oficina con papeles de closing en el escritorio</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- V2 S5 -->
+      <div class="scene" id="scene-v2s5">
+        <div class="scene-left"><div class="scene-num sn-es1"><span class="changed-dot"></span>5</div><div class="scene-time">27–35 seg</div></div>
+        <div class="scene-right">
+          <div class="scene-title">🎯 Cierre con Autoridad</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"Comprar una casa no es solo una transacción de números. Es saber exactamente cómo moverte en el momento correcto."</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Tu versión</span><button class="edit-reset hidden" id="reset-v2s5" onclick="resetScene('v2s5')">Restaurar original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v2s5" oninput="onEdit('v2s5',this)">"Comprar una casa no es solo una transacción de números. Es saber exactamente cómo moverte en el momento correcto."</textarea>
+            <div class="diff-preview" id="diff-v2s5"><div class="d-label">Vista previa de cambios</div><div id="diff-content-v2s5"></div></div>
+          </div>
+          <div class="role-block client-es1"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Habla lento con peso — este es el momento más poderoso del video</span></div><div class="role-item"><div class="ri-dot"></div><span>Termina mirando a cámara fijo — 2 segundos de silencio después</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Texto: "Es saber cómo moverte. 🏡"</span></div><div class="role-item"><div class="ri-dot"></div><span>Nombre, handle de Instagram y branding de cierre</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Locación</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Frente a la entrada de una propiedad o calle tranquila</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternativa: mismo lugar del hook para cerrar el círculo</span></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer"><button class="copy-btn" onclick="copyScript('script2',this)">⧉ &nbsp; Copiar Script</button></div>
+  </div>
+
+  <!-- ═══ VIDEO 03 — ESPAÑOL TIMELINE ═══ -->
+  <div class="video-block" data-lang="es">
+    <div class="vid-header vh-es2">
+      <div class="vid-num">03</div>
+      <div class="vid-meta"><h2>"Lo Que Nadie Te Dice que Pasa Después de Firmar el Contrato"</h2><div class="vid-tags"><span class="vid-tag">Timeline</span><span class="vid-tag">30–40 seg</span></div></div>
       <div class="lang-pill">🇪🇸 Español</div>
     </div>
-
-    <div class="song-bar sb-v3">
-      <div class="song-disc">🎵</div>
-      <span class="song-lbl">Música</span>
-      <span class="song-name">"Hawái" – Maluma <em>(instrumental)</em></span>
-    </div>
-
-    <div class="script-body sb-border-v3">
-      <div class="script-label">📄 Tu Script</div>
+    <div class="song-bar sb-es2"><div class="song-disc">🎵</div><span class="song-lbl">Música</span><span class="song-name">"Hawái" – Maluma <em>(instrumental)</em></span></div>
+    <div class="script-block sbl-es2">
+      <div class="block-label">📄 Tu Script</div>
       <div class="script-text" id="script3">Nadie te dice lo que pasa realmente entre el día que encuentras tu casa y el día que recibes tus llaves.
 
 La primera semana es emoción — oferta aceptada, todo se siente perfecto.
@@ -582,58 +458,292 @@ Todo ese proceso tiene momentos donde algo puede salir mal.
 
 Mi trabajo es asegurarme de que nada lo haga.</div>
     </div>
+    <div class="scenes-wrapper">
+      <div class="scenes-header">🎬 Escenas — Edita el texto directamente si quieres cambios</div>
 
-    <button class="copy-btn" onclick="copyScript('script3', this)">
-      <span class="copy-icon">⧉</span> Copiar Script
-    </button>
+      <!-- V3 S1 -->
+      <div class="scene" id="scene-v3s1">
+        <div class="scene-left"><div class="scene-num sn-es2"><span class="changed-dot"></span>1</div><div class="scene-time">0–4 seg</div></div>
+        <div class="scene-right">
+          <div class="scene-title">🎣 Hook — La Promesa</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"Nadie te dice lo que pasa realmente entre el día que encuentras tu casa y el día que recibes tus llaves."</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Tu versión</span><button class="edit-reset hidden" id="reset-v3s1" onclick="resetScene('v3s1')">Restaurar original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v3s1" oninput="onEdit('v3s1',this)">"Nadie te dice lo que pasa realmente entre el día que encuentras tu casa y el día que recibes tus llaves."</textarea>
+            <div class="diff-preview" id="diff-v3s1"><div class="d-label">Vista previa de cambios</div><div id="diff-content-v3s1"></div></div>
+          </div>
+          <div class="role-block client-es2"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Cara de "tengo información que necesitas" — cejas ligeramente levantadas, voz calmada</span></div><div class="role-item"><div class="ri-dot"></div><span>Énfasis en "realmente" — es lo que le dice al espectador que esto es diferente</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Texto: "Lo que pasa DESPUÉS de que dices sí 🏡"</span></div><div class="role-item"><div class="ri-dot"></div><span>Música entra suave desde el inicio</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Locación</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Frente a la entrada de una propiedad — letrero de venta visible al fondo</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternativa: calle residencial con casas bonitas desenfocadas al fondo</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- V3 S2 -->
+      <div class="scene" id="scene-v3s2">
+        <div class="scene-left"><div class="scene-num sn-es2"><span class="changed-dot"></span>2</div><div class="scene-time">4–14 seg</div></div>
+        <div class="scene-right">
+          <div class="scene-title">📅 Semanas 1 y 2</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"La primera semana es emoción — oferta aceptada, todo se siente perfecto. La segunda semana llega la inspección. Aquí es donde muchos compradores entran en pánico por primera vez."</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Tu versión</span><button class="edit-reset hidden" id="reset-v3s2" onclick="resetScene('v3s2')">Restaurar original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v3s2" oninput="onEdit('v3s2',this)">"La primera semana es emoción — oferta aceptada, todo se siente perfecto. La segunda semana llega la inspección. Aquí es donde muchos compradores entran en pánico por primera vez."</textarea>
+            <div class="diff-preview" id="diff-v3s2"><div class="d-label">Vista previa de cambios</div><div id="diff-content-v3s2"></div></div>
+          </div>
+          <div class="role-block client-es2"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Semana 1: sonríe — transmite esa emoción genuina de "lo lograste"</span></div><div class="role-item"><div class="ri-dot"></div><span>Semana 2: baja el tono ligeramente y pon cara más seria</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Texto: "Semana 1: ✅  |  Semana 2: 😬 Inspección"</span></div><div class="role-item"><div class="ri-dot"></div><span>Corte de edición entre semanas para marcar el cambio de tono</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Locación</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Tu carro o interior de una propiedad — espacios íntimos para el cambio de emoción</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternativa: oficina con papeles sobre el escritorio de fondo</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- V3 S3 -->
+      <div class="scene" id="scene-v3s3">
+        <div class="scene-left"><div class="scene-num sn-es2"><span class="changed-dot"></span>3</div><div class="scene-time">14–22 seg</div></div>
+        <div class="scene-right">
+          <div class="scene-title">📋 Semanas 3, 4 y 5</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"La tercera y cuarta semana el banco empieza a pedir documentos. Muchos, y rápido. La quinta semana es la tasación. El banco decide si la casa vale lo que acordaron pagar."</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Tu versión</span><button class="edit-reset hidden" id="reset-v3s3" onclick="resetScene('v3s3')">Restaurar original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v3s3" oninput="onEdit('v3s3',this)">"La tercera y cuarta semana el banco empieza a pedir documentos. Muchos, y rápido. La quinta semana es la tasación. El banco decide si la casa vale lo que acordaron pagar."</textarea>
+            <div class="diff-preview" id="diff-v3s3"><div class="d-label">Vista previa de cambios</div><div id="diff-content-v3s3"></div></div>
+          </div>
+          <div class="role-block client-es2"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Tono neutro y directo — como alguien explicando el proceso con claridad</span></div><div class="role-item"><div class="ri-dot"></div><span>Énfasis en "Muchos, y rápido" — genera empatía</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Texto: "Semana 3–4: 📄 Docs  |  Semana 5: 🏦 Tasación"</span></div><div class="role-item"><div class="ri-dot"></div><span>Edición de ritmo para que el timeline se sienta fluido</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Locación</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Escritorio con documentos o laptop visible</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternativa: caminando dentro de una propiedad</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- V3 S4 -->
+      <div class="scene" id="scene-v3s4">
+        <div class="scene-left"><div class="scene-num sn-es2"><span class="changed-dot"></span>4</div><div class="scene-time">22–30 seg</div></div>
+        <div class="scene-right">
+          <div class="scene-title">😮‍💨 La Semana Final</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"Y la última semana antes del cierre es la más silenciosa — y la más nerviosa. Revisión final, firma de documentos, transferencia de fondos."</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Tu versión</span><button class="edit-reset hidden" id="reset-v3s4" onclick="resetScene('v3s4')">Restaurar original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v3s4" oninput="onEdit('v3s4',this)">"Y la última semana antes del cierre es la más silenciosa — y la más nerviosa. Revisión final, firma de documentos, transferencia de fondos."</textarea>
+            <div class="diff-preview" id="diff-v3s4"><div class="d-label">Vista previa de cambios</div><div id="diff-content-v3s4"></div></div>
+          </div>
+          <div class="role-block client-es2"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Baja la voz — que se sienta el peso de esa espera final</span></div><div class="role-item"><div class="ri-dot"></div><span>Énfasis en "la más nerviosa" — pausa, deja que aterrice</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Texto: "La última semana… ⏳"</span></div><div class="role-item"><div class="ri-dot"></div><span>Corte lento — el silencio tiene más impacto que el audio</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Locación</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Tu carro o sala de espera — la intimidad refleja la tensión</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternativa: oficina con papeles de closing sobre la mesa</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- V3 S5 -->
+      <div class="scene" id="scene-v3s5">
+        <div class="scene-left"><div class="scene-num sn-es2"><span class="changed-dot"></span>5</div><div class="scene-time">30–38 seg</div></div>
+        <div class="scene-right">
+          <div class="scene-title">🔑 Cierre y Remate Final</div>
+          <div class="scene-script-wrap">
+            <div class="scene-script-original">"Y entonces — las llaves son tuyas. Todo ese proceso tiene momentos donde algo puede salir mal. Mi trabajo es asegurarme de que nada lo haga."</div>
+            <div class="edit-bar"><span class="edit-bar-label">✏️ Tu versión</span><button class="edit-reset hidden" id="reset-v3s5" onclick="resetScene('v3s5')">Restaurar original</button></div>
+            <textarea class="scene-edit-ta" id="edit-v3s5" oninput="onEdit('v3s5',this)">"Y entonces — las llaves son tuyas. Todo ese proceso tiene momentos donde algo puede salir mal. Mi trabajo es asegurarme de que nada lo haga."</textarea>
+            <div class="diff-preview" id="diff-v3s5"><div class="d-label">Vista previa de cambios</div><div id="diff-content-v3s5"></div></div>
+          </div>
+          <div class="role-block client-es2"><span class="role-tag">Anita</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Al decir "las llaves son tuyas" — sonríe de verdad</span></div><div class="role-item"><div class="ri-dot"></div><span>El remate dilo con calma — como promesa real, no como slogan</span></div><div class="role-item"><div class="ri-dot"></div><span>2 segundos de silencio mirando a cámara al final</span></div></div></div>
+          <div class="role-block dira"><span class="role-tag">Nosotros nos encargamos</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Texto: "🔑 Las llaves son tuyas."</span></div><div class="role-item"><div class="ri-dot"></div><span>Nombre, handle de Instagram y branding de cierre</span></div></div></div>
+          <div class="role-block location"><span class="role-tag">📍 Locación</span><div class="role-items"><div class="role-item"><div class="ri-dot"></div><span>Sostén unas llaves frente a la puerta de una propiedad</span></div><div class="role-item"><div class="ri-dot"></div><span>Alternativa: frente a la casa del cliente el día del closing (con permiso)</span></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer"><button class="copy-btn" onclick="copyScript('script3',this)">⧉ &nbsp; Copiar Script</button></div>
   </div>
 
 </div>
 
-<!-- ── FOOTER ── -->
-<footer>
-  <div class="footer-brand">
-    <div class="f-bar b"></div>
-    <span class="brand-name">Dira Creative Studios</span>
-    <div class="f-bar r"></div>
+<!-- POSTING ORDER -->
+<div class="posting-section">
+  <div class="divider"></div>
+  <div class="section-head"><h2>📅 Posting Order</h2><p>Empieza con el que posiciona, luego el que emociona, cierra con el que educa.</p></div>
+  <div class="posting-steps">
+    <div class="posting-step"><div class="ps-day"><span>Day 1<br>Monday</span></div><div class="ps-content"><strong><span class="ps-dot" style="background:#7B5FD4"></span>Video 03 — Español · Timeline</strong><p>El más educativo. Genera saves desde el primer día y posiciona a Anita como experta.</p></div></div>
+    <div class="posting-step"><div class="ps-day"><span>Day 2<br>Wednesday</span></div><div class="ps-content"><strong><span class="ps-dot" style="background:#5B8EF0"></span>Video 01 — English · Myth vs Reality</strong><p>Reaches the English-speaking audience. Myth-breaking format drives strong shares.</p></div></div>
+    <div class="posting-step"><div class="ps-day"><span>Day 3<br>Friday</span></div><div class="ps-content"><strong><span class="ps-dot" style="background:#F07070"></span>Video 02 — Español · Storytelling</strong><p>El viernes la gente está relajada. Este es el que más comentarios va a generar.</p></div></div>
   </div>
+</div>
+
+<footer>
+  <div class="footer-brand"><div class="f-bar b"></div><span class="brand-name">Dira Creative Studios</span><div class="f-bar r"></div></div>
   <p>Produced for Anita — Real Estate Agent</p>
 </footer>
 
 <script>
-  function filter(lang, btn) {
-    // Update buttons
-    document.querySelectorAll('.filter-btn').forEach(b => {
-      b.className = 'filter-btn';
-    });
-    if (lang === 'all') btn.classList.add('active-all');
-    else if (lang === 'en') btn.classList.add('active-en');
-    else btn.classList.add('active-es');
+// ── ORIGINALS ──────────────────────────────────────────
+const ORIG = {};
+document.querySelectorAll('.scene-edit-ta').forEach(ta => {
+  ORIG[ta.id.replace('edit-','')] = ta.value;
+});
 
-    // Show/hide cards
-    document.querySelectorAll('.script-card').forEach(card => {
-      if (lang === 'all' || card.dataset.lang === lang) {
-        card.classList.remove('hidden');
-      } else {
-        card.classList.add('hidden');
-      }
-    });
+const LABELS = {
+  'v1s1':'Video 01 · Scene 1 — Hook',       'v1s2':'Video 01 · Scene 2 — Revelation',
+  'v1s3':'Video 01 · Scene 3 — 3 Options',  'v1s4':'Video 01 · Scene 4 — Examples',
+  'v1s5':'Video 01 · Scene 5 — Close',
+  'v2s1':'Video 02 · Escena 1 — Hook',      'v2s2':'Video 02 · Escena 2 — El Problema',
+  'v2s3':'Video 02 · Escena 3 — Vendedores','v2s4':'Video 02 · Escena 4 — La Solución',
+  'v2s5':'Video 02 · Escena 5 — Cierre',
+  'v3s1':'Video 03 · Escena 1 — Hook',      'v3s2':'Video 03 · Escena 2 — Semanas 1-2',
+  'v3s3':'Video 03 · Escena 3 — Semanas 3-5','v3s4':'Video 03 · Escena 4 — Semana Final',
+  'v3s5':'Video 03 · Escena 5 — Las Llaves'
+};
+
+// ── WORD-LEVEL DIFF ────────────────────────────────────
+function tokenize(str){return str.split(/(\s+|[.,!?;:"'—…—–()\[\]])/)}
+
+function lcs(a,b){
+  const m=a.length,n=b.length;
+  const dp=Array.from({length:m+1},()=>new Array(n+1).fill(0));
+  for(let i=m-1;i>=0;i--)for(let j=n-1;j>=0;j--){
+    if(a[i]===b[j])dp[i][j]=dp[i+1][j+1]+1;
+    else dp[i][j]=Math.max(dp[i+1][j],dp[i][j+1]);
+  }
+  const res=[];
+  let i=0,j=0;
+  while(i<m||j<n){
+    if(i<m&&j<n&&a[i]===b[j]){res.push({t:'same',v:a[i]});i++;j++;}
+    else if(j<n&&(i>=m||dp[i][j+1]>=dp[i+1][j])){res.push({t:'add',v:b[j]});j++;}
+    else{res.push({t:'del',v:a[i]});i++;}
+  }
+  return res;
+}
+
+function renderDiff(diff){
+  return diff.map(d=>{
+    if(d.t==='same')return`<span class="d-same">${esc(d.v)}</span>`;
+    if(d.t==='add') return`<span class="d-add">${esc(d.v)}</span>`;
+    if(d.t==='del') return`<span class="d-del">${esc(d.v)}</span>`;
+  }).join('');
+}
+
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+function plainDiff(a,b){
+  const diff=lcs(tokenize(a),tokenize(b));
+  let out='';
+  diff.forEach(d=>{
+    if(d.t==='same')out+=d.v;
+    else if(d.t==='add')out+=`[+${d.v}]`;
+    else if(d.t==='del')out+=`[-${d.v}]`;
+  });
+  return out;
+}
+
+// ── ON EDIT ────────────────────────────────────────────
+function onEdit(id, ta){
+  const orig=ORIG[id];
+  const curr=ta.value;
+  const changed=curr.trim()!==orig.trim();
+
+  // Update textarea style
+  ta.classList.toggle('is-changed',changed);
+
+  // Show/hide reset button
+  const resetBtn=document.getElementById('reset-'+id);
+  if(resetBtn)resetBtn.classList.toggle('hidden',!changed);
+
+  // Show diff preview
+  const diffEl=document.getElementById('diff-'+id);
+  const diffContent=document.getElementById('diff-content-'+id);
+  if(changed){
+    const diff=lcs(tokenize(orig),tokenize(curr));
+    diffContent.innerHTML=renderDiff(diff);
+    diffEl.classList.add('visible');
+  } else {
+    diffEl.classList.remove('visible');
   }
 
-  function copyScript(id, btn) {
-    const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => {
-      const orig = btn.innerHTML;
-      btn.classList.add('copied');
-      btn.innerHTML = '<span class="copy-icon">✓</span> Copied!';
-      setTimeout(() => {
-        btn.classList.remove('copied');
-        btn.innerHTML = orig;
-      }, 2000);
-    });
+  // Update scene highlight
+  const scene=document.getElementById('scene-'+id);
+  scene.classList.toggle('has-changes',changed);
+
+  updateFab();
+}
+
+function resetScene(id){
+  const ta=document.getElementById('edit-'+id);
+  ta.value=ORIG[id];
+  onEdit(id,ta);
+}
+
+// ── FAB UPDATE ─────────────────────────────────────────
+function updateFab(){
+  const changes=getChanges();
+  const count=changes.length;
+  const fab=document.getElementById('sendFab');
+  const badge=document.getElementById('fabBadge');
+  fab.classList.toggle('active',count>0);
+  badge.textContent=count;
+}
+
+function getChanges(){
+  return Object.keys(ORIG).filter(id=>{
+    const ta=document.getElementById('edit-'+id);
+    return ta&&ta.value.trim()!==ORIG[id].trim();
+  });
+}
+
+// ── SEND EMAIL ─────────────────────────────────────────
+function sendEmail(){
+  const changes=getChanges();
+  if(changes.length===0){
+    alert('No hay cambios aún. Edita el texto de alguna escena para enviar tus cambios.');
+    return;
   }
+  const d=new Date().toLocaleDateString('es-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+  let body=`CAMBIOS AL SCRIPT — ANITA\nDira Creative Studios | ${d}\n`;
+  body+=`${'═'.repeat(55)}\n\n`;
+  body+=`Anita modificó ${changes.length} escena(s):\n\n`;
+
+  // Group by video
+  const byVideo={'01':[],'02':[],'03':[]};
+  changes.forEach(id=>{
+    const v=id.startsWith('v1')?'01':id.startsWith('v2')?'02':'03';
+    byVideo[v].push(id);
+  });
+
+  const videoTitles={
+    '01':'🇺🇸 VIDEO 01 — English · Myth vs Reality',
+    '02':'🇪🇸 VIDEO 02 — Español · Storytelling',
+    '03':'🇪🇸 VIDEO 03 — Español · Timeline'
+  };
+
+  Object.entries(byVideo).forEach(([vnum,ids])=>{
+    if(!ids.length)return;
+    body+=`${videoTitles[vnum]}\n${'─'.repeat(45)}\n\n`;
+    ids.forEach(id=>{
+      const orig=ORIG[id];
+      const curr=document.getElementById('edit-'+id).value;
+      body+=`${LABELS[id]}\n\n`;
+      body+=`ORIGINAL:\n${orig}\n\n`;
+      body+=`CAMBIO DE ANITA:\n${curr}\n\n`;
+      body+=`DIFERENCIAS:\n${plainDiff(orig,curr)}\n`;
+      body+=`\n${'·'.repeat(40)}\n\n`;
+    });
+  });
+
+  body+=`${'═'.repeat(55)}\nEnviado desde: Anita Scripts Portal — Dira Creative Studios`;
+
+  const subject=encodeURIComponent(`Script Changes — Anita | ${changes.length} escena(s) modificada(s)`);
+  const encodedBody=encodeURIComponent(body);
+  window.location.href=`mailto:issey.solutions@gmail.com?subject=${subject}&body=${encodedBody}`;
+}
+
+// ── FILTER + COPY ──────────────────────────────────────
+function filter(lang,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.className='filter-btn');
+  if(lang==='all')btn.classList.add('active-all');
+  else if(lang==='en')btn.classList.add('active-en');
+  else btn.classList.add('active-es');
+  document.querySelectorAll('.video-block').forEach(c=>c.classList.toggle('hidden',lang!=='all'&&c.dataset.lang!==lang));
+}
+
+function copyScript(id,btn){
+  navigator.clipboard.writeText(document.getElementById(id).innerText).then(()=>{
+    const o=btn.innerHTML;btn.classList.add('copied');btn.innerHTML='✓ &nbsp; Copied!';
+    setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML=o;},2000);
+  });
+}
 </script>
-
 </body>
 </html>
 
